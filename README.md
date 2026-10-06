@@ -27,7 +27,7 @@ site-marcelo/
 
 - Os frames ficam em **`frames/`**, ao lado do `index.html`, com os nomes `frame-0001.webp` até `frame-0240.webp`.
 - Se mudar a quantidade de frames, ajuste `CONFIG.frames.count` em `script.js`.
-- **Trocou os frames depois de publicar?** Mude `CONFIG.frames.version` em `script.js` (`'1'` → `'2'`). Assim os visitantes baixam os novos e não ficam com a versão antiga em cache.
+- **Trocou os frames depois de publicar?** Aumente `CONFIG.frames.version` em `script.js` (ex.: `'2'` → `'3'`). Assim os visitantes baixam os novos e não ficam com a versão antiga em cache.
 - **Duração:** a altura de `.hero` em `styles.css` (`500vh`). Um valor maior deixa a animação mais lenta.
 - **Enquadramento:** o frame sempre preenche a tela mantendo a proporção. No celular em pé, ele corta no máximo 25% (`CONFIG.maxCrop`) e completa o resto esticando as bordas do próprio frame, para que o aparelho nunca fique cortado.
 - **Textos sobre a animação:** são os blocos `data-beat="início,fim"` no `index.html` (0 = começo da rolagem, 1 = fim).

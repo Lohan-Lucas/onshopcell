@@ -21,7 +21,7 @@
       prefix: 'frame-',     // frame-0001.webp
       digits: 4,            // 0001 = 4 dígitos
       extension: '.webp',
-      version: '1',         // ao trocar os frames, mude para '2', '3'... (o navegador baixa de novo)
+      version: '2',         // ao trocar os frames, aumente este número (o navegador baixa de novo)
     },
 
     // Enquadramento: o frame sempre preenche a tela mantendo a proporção. Se para
