@@ -1,5 +1,9 @@
-# Publica o site no GitHub Pages a cada push na branch main
-# (ou manualmente: aba Actions → "Publicar site" → Run workflow).
+# Publica o site na Cloudflare Pages a cada push na branch main
+# (ou manualmente: aba Actions → "Publicar site" → Run workflow)
+# e mantém o endereço antigo do GitHub Pages redirecionando para o novo.
+#
+# Os produtos NÃO dependem deste deploy: eles ficam no banco da Cloudflare e
+# são alterados na hora pelo app do lojista (/admin/).
 name: Publicar site
 
 on:
@@ -7,34 +11,64 @@ on:
     branches: [main]
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# um deploy por vez; um novo push não cancela o que já está publicando
 concurrency:
-  group: pages
+  group: deploy
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  cloudflare:
+    name: Cloudflare Pages
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      contents: read
+    env:
+      TEM_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
     steps:
       - name: Baixar o código
         uses: actions/checkout@v7
 
+      - name: Aviso
+        if: env.TEM_TOKEN != 'true'
+        run: echo "::notice::Para publicar automaticamente, cadastre os segredos CLOUDFLARE_API_TOKEN e CLOUDFLARE_ACCOUNT_ID (veja o README)."
+
+      - name: Publicar na Cloudflare Pages
+        if: env.TEM_TOKEN == 'true'
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy --project-name=onshopcell --branch=main
+
+  redirecionar:
+    name: Endereço antigo para o novo
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Configurar o GitHub Pages
         uses: actions/configure-pages@v6
 
-      # só os arquivos do site vão para o ar (README, .github etc. ficam de fora)
-      - name: Montar a pasta do site
+      - name: Página que redireciona
         run: |
           mkdir _site
-          cp -r index.html styles.css script.js robots.txt assets frames _site/
+          cat > _site/index.html <<'HTML'
+          <!doctype html>
+          <html lang="pt-BR">
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="robots" content="noindex">
+          <title>On Shop Cell</title>
+          <link rel="canonical" href="https://onshopcell.pages.dev/">
+          <meta http-equiv="refresh" content="0; url=https://onshopcell.pages.dev/">
+          <script>location.replace('https://onshopcell.pages.dev/' + location.hash);</script>
+          <p>O site da On Shop Cell mudou de endereço: <a href="https://onshopcell.pages.dev/">onshopcell.pages.dev</a></p>
+          </html>
+          HTML
+          cp _site/index.html _site/404.html
 
       - name: Enviar os arquivos
         uses: actions/upload-pages-artifact@v5

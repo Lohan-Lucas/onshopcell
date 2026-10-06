@@ -1,0 +1,235 @@
+{
+  "versao": 1,
+  "atualizadoEm": "2026-10-06T12:00:00.000Z",
+  "categorias": [
+    { "id": "celulares", "nome": "Celulares" },
+    { "id": "carregadores", "nome": "Carregadores e cabos" },
+    { "id": "audio", "nome": "Fones e som" },
+    { "id": "smartwatch", "nome": "Smartwatch" },
+    { "id": "capas", "nome": "Capas" },
+    { "id": "variedades", "nome": "Variedades" }
+  ],
+  "produtos": [
+    {
+      "id": "redmi-note-14",
+      "titulo": "Redmi Note 14 · 8/256GB",
+      "categoria": "celulares",
+      "descricao": "8 GB de RAM e 256 GB de armazenamento.",
+      "preco": null,
+      "precoAntigo": null,
+      "cores": [],
+      "imagens": ["assets/produtos/redmi-note-14.webp"],
+      "destaque": true,
+      "disponivel": true
+    },
+    {
+      "id": "smartwatch",
+      "titulo": "Smartwatch",
+      "categoria": "smartwatch",
+      "descricao": "Notificações e monitor de atividades no pulso.",
+      "preco": null,
+      "precoAntigo": null,
+      "cores": [
+        { "nome": "Rosa", "hex": "#f2a7b9" },
+        { "nome": "Branco", "hex": "#f5f5f5" },
+        { "nome": "Preto", "hex": "#1b1d21" }
+      ],
+      "imagens": ["assets/produtos/smartwatch.webp"],
+      "destaque": false,
+      "disponivel": true
+    },
+    {
+      "id": "fonte-usb-c-20w",
+      "titulo": "Fonte USB-C 20W",
+      "categoria": "carregadores",
+      "descricao": "Carregamento rápido para aparelhos com cabo USB-C.",
+      "preco": null,
+      "precoAntigo": null,
+      "cores": [],
+      "imagens": ["assets/produtos/fonte-usb-c-20w.webp"],
+      "destaque": false,
+      "disponivel": true
+    },
+    {
+      "id": "mini-caixa-de-som",
+      "titulo": "Mini caixa de som Bluetooth",
+      "categoria": "audio",
+      "descricao": "Pequena no tamanho: cabe na palma da mão.",
+      "preco": null,
+      "precoAntigo": null,
+      "cores": [
+        { "nome": "Verde-água", "hex": "#6fd6c4" },
+        { "nome": "Azul-claro", "hex": "#8ec5ff" },
+        { "nome": "Rosa", "hex": "#f2a7b9" },
+        { "nome": "Amarelo", "hex": "#f5c842" },
+        { "nome": "Cinza", "hex": "#8a8f98" }
+      ],
+      "imagens": ["assets/produtos/mini-caixa-de-som.webp"],
+      "destaque": false,
+      "disponivel": true
+    },
+    {
+      "id": "fone-lightning",
+      "titulo": "Fone com conector Lightning",
+      "categoria": "audio",
+      "descricao": "Para iPhone com entrada Lightning.",
+      "preco": null,
+      "precoAntigo": null,
+      "cores": [],
+      "imagens": ["assets/produtos/earpods-lightning.webp"],
+      "destaque": false,
+      "disponivel": true
+    },
+    {
+      "id": "power-bank-10000",
+      "titulo": "Power bank 10.000mAh",
+      "categoria": "carregadores",
+      "descricao": "Bateria extra para o celular durar o dia todo.",
+      "preco": null,
+      "precoAntigo": null,
+      "cores": [],
+      "imagens": ["assets/produtos/power-bank-10000.webp"],
+      "destaque": false,
+      "disponivel": true
+    },
+    {
+      "id": "game-stick",
+      "titulo": "Video game retrô + 2 controles",
+      "categoria": "variedades",
+      "descricao": "Game stick com controles sem fio: é só ligar na TV e jogar.",
+      "preco": null,
+      "precoAntigo": null,
+      "cores": [],
+      "imagens": ["assets/produtos/game-stick.webp"],
+      "destaque": false,
+      "disponivel": true
+    },
+    {
+      "id": "capa-iphone-transparente",
+      "titulo": "Capa transparente para iPhone",
+      "categoria": "capas",
+      "descricao": "Protege sem esconder o visual do aparelho.",
+      "preco": null,
+      "precoAntigo": null,
+      "cores": [],
+      "imagens": ["assets/produtos/capa-iphone-transparente.webp"],
+      "destaque": false,
+      "disponivel": true
+    },
+    {
+      "id": "smartphones-redmi",
+      "titulo": "Smartphones Xiaomi Redmi",
+      "categoria": "celulares",
+      "descricao": "Modelos e cores variados. Pergunte pelo seu favorito.",
+      "preco": null,
+      "precoAntigo": null,
+      "cores": [],
+      "imagens": ["assets/produtos/celulares-redmi.webp"],
+      "destaque": false,
+      "disponivel": true
+    },
+    {
+      "id": "cabo-usb-c-lightning",
+      "titulo": "Cabo USB-C para Lightning",
+      "categoria": "carregadores",
+      "descricao": "Para carregar o iPhone em fontes USB-C.",
+      "preco": null,
+      "precoAntigo": null,
+      "cores": [],
+      "imagens": ["assets/produtos/cabo-usb-c-lightning.webp"],
+      "destaque": false,
+      "disponivel": true
+    },
+    {
+      "id": "pulseiras-silicone",
+      "titulo": "Pulseiras de silicone",
+      "categoria": "smartwatch",
+      "descricao": "Para smartwatch.",
+      "preco": null,
+      "precoAntigo": null,
+      "cores": [
+        { "nome": "Azul-marinho", "hex": "#1f2f55" },
+        { "nome": "Azul", "hex": "#2f6fde" },
+        { "nome": "Cinza", "hex": "#8a8f98" },
+        { "nome": "Branco", "hex": "#f5f5f5" },
+        { "nome": "Lilás", "hex": "#b9a3e3" },
+        { "nome": "Verde-água", "hex": "#6fd6c4" }
+      ],
+      "imagens": ["assets/produtos/pulseiras-smartwatch.webp"],
+      "destaque": false,
+      "disponivel": true
+    },
+    {
+      "id": "fones-com-fio",
+      "titulo": "Fones de ouvido com fio",
+      "categoria": "audio",
+      "descricao": "Vários modelos para o dia a dia.",
+      "preco": null,
+      "precoAntigo": null,
+      "cores": [],
+      "imagens": ["assets/produtos/fones-com-fio.webp"],
+      "destaque": false,
+      "disponivel": true
+    },
+    {
+      "id": "fones-intra-auriculares",
+      "titulo": "Fones intra-auriculares",
+      "categoria": "audio",
+      "descricao": "Para músicas, vídeos e chamadas.",
+      "preco": null,
+      "precoAntigo": null,
+      "cores": [],
+      "imagens": ["assets/produtos/fones-de-ouvido.webp"],
+      "destaque": false,
+      "disponivel": true
+    },
+    {
+      "id": "power-bank-5000",
+      "titulo": "Carregador portátil 5.000mAh",
+      "categoria": "carregadores",
+      "descricao": "Compacto e leve para levar no bolso.",
+      "preco": null,
+      "precoAntigo": null,
+      "cores": [],
+      "imagens": ["assets/produtos/power-bank-5000.webp"],
+      "destaque": false,
+      "disponivel": true
+    },
+    {
+      "id": "cabos-usb",
+      "titulo": "Cabos USB",
+      "categoria": "carregadores",
+      "descricao": "Cabos de carga e dados para diversos aparelhos.",
+      "preco": null,
+      "precoAntigo": null,
+      "cores": [],
+      "imagens": ["assets/produtos/cabo-usb.webp"],
+      "destaque": false,
+      "disponivel": true
+    },
+    {
+      "id": "capa-tablet",
+      "titulo": "Capa para tablet",
+      "categoria": "capas",
+      "descricao": "Proteção com estilo para o seu tablet.",
+      "preco": null,
+      "precoAntigo": null,
+      "cores": [],
+      "imagens": ["assets/produtos/capa-tablet.webp"],
+      "destaque": false,
+      "disponivel": true
+    },
+    {
+      "id": "copo-termico",
+      "titulo": "Copo térmico Beer Pint",
+      "categoria": "variedades",
+      "descricao": "Sua bebida gelada por mais tempo.",
+      "preco": null,
+      "precoAntigo": null,
+      "cores": [],
+      "imagens": ["assets/produtos/copo-termico.webp"],
+      "destaque": false,
+      "disponivel": true
+    }
+  ]
+}

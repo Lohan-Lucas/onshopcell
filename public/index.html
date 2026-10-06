@@ -9,14 +9,14 @@
   <meta name="color-scheme" content="dark">
 
   <!-- Endereço público do site: se mudar (ex.: domínio próprio), troque em todas as linhas abaixo e no JSON-LD -->
-  <link rel="canonical" href="https://lohan-lucas.github.io/onshopcell/">
+  <link rel="canonical" href="https://onshopcell.pages.dev/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:site_name" content="On Shop Cell">
-  <meta property="og:url" content="https://lohan-lucas.github.io/onshopcell/">
+  <meta property="og:url" content="https://onshopcell.pages.dev/">
   <meta property="og:title" content="On Shop Cell | Acessórios e Assistência Especializada">
   <meta property="og:description" content="Acessórios, smartphones e assistência para o seu celular em Maracanaú/CE. Entrega grátis: peça pelo WhatsApp.">
-  <meta property="og:image" content="https://lohan-lucas.github.io/onshopcell/assets/og-image.jpg">
+  <meta property="og:image" content="https://onshopcell.pages.dev/assets/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Logo On Shop Cell, Assistência Especializada">
@@ -56,9 +56,9 @@
     "name": "On Shop Cell",
     "alternateName": "On Shopcell Oficial",
     "description": "Acessórios para celular, smartphones e assistência especializada em Maracanaú/CE, com entrega grátis.",
-    "url": "https://lohan-lucas.github.io/onshopcell/",
-    "logo": "https://lohan-lucas.github.io/onshopcell/assets/icon-512.png",
-    "image": "https://lohan-lucas.github.io/onshopcell/assets/og-image.jpg",
+    "url": "https://onshopcell.pages.dev/",
+    "logo": "https://onshopcell.pages.dev/assets/icon-512.png",
+    "image": "https://onshopcell.pages.dev/assets/og-image.jpg",
     "telephone": "+55 85 99803-3405",
     "address": {
       "@type": "PostalAddress",
@@ -112,6 +112,8 @@
     <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
     <symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></symbol>
     <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
+    <symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
   </svg>
 
   <!-- Tela de carregamento (aparece só enquanto os frames da animação carregam) -->
@@ -265,283 +267,24 @@
     </section>
 
     <!-- ===================== PRODUTOS =====================
-         Para adicionar um produto: copie um <li class="product"> inteiro e troque
-         a foto, o nome, a descrição, a categoria (data-category) e o data-product. -->
+         Os produtos vêm do painel do lojista (/admin/), não daqui.
+         O visual de cada cartão é o <template id="produto-modelo"> abaixo. -->
     <section class="section products" id="produtos" aria-labelledby="produtos-titulo">
       <div class="container">
         <div class="section-head" data-reveal>
           <p class="eyebrow">Loja online</p>
           <h2 class="section-title" id="produtos-titulo">Acessórios em geral</h2>
-          <p class="section-lead">Escolha o produto e finalize o pedido pelo WhatsApp. Preços e disponibilidade direto com a gente.</p>
+          <p class="section-lead">Escolha o produto e a cor, e finalize o pedido pelo WhatsApp.</p>
         </div>
 
-        <div class="filters" role="group" aria-label="Filtrar produtos por categoria" data-filters>
-          <button class="chip" type="button" aria-pressed="true" data-filter="todos">Todos</button>
-          <button class="chip" type="button" aria-pressed="false" data-filter="celulares">Celulares</button>
-          <button class="chip" type="button" aria-pressed="false" data-filter="carregadores">Carregadores e cabos</button>
-          <button class="chip" type="button" aria-pressed="false" data-filter="audio">Fones e som</button>
-          <button class="chip" type="button" aria-pressed="false" data-filter="smartwatch">Smartwatch</button>
-          <button class="chip" type="button" aria-pressed="false" data-filter="capas">Capas</button>
-          <button class="chip" type="button" aria-pressed="false" data-filter="variedades">Variedades</button>
-        </div>
+        <div class="filters" role="group" aria-label="Filtrar produtos por categoria" data-filters hidden></div>
         <p class="sr-only" aria-live="polite" data-filter-status></p>
 
-        <ul class="product-grid" data-products>
-          <li class="product" data-category="celulares" data-reveal>
-            <div class="product__media">
-              <span class="product__badge">Destaque</span>
-              <img src="assets/produtos/redmi-note-14.webp" alt="Smartphones Redmi Note 14" width="362" height="482" loading="lazy" decoding="async">
-            </div>
-            <div class="product__body">
-              <span class="product__tag">Celulares</span>
-              <h3 class="product__name">Redmi Note 14 · 8/256GB</h3>
-              <p class="product__desc">8 GB de RAM e 256 GB de armazenamento. Consulte as cores.</p>
-              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Redmi Note 14 8/256GB" target="_blank" rel="noopener">
-                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
-                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
-              </a>
-            </div>
-          </li>
-
-          <li class="product" data-category="smartwatch" data-reveal>
-            <div class="product__media">
-              <img src="assets/produtos/smartwatch.webp" alt="Smartwatches nas cores rosa, branco e preto" width="362" height="482" loading="lazy" decoding="async">
-            </div>
-            <div class="product__body">
-              <span class="product__tag">Smartwatch</span>
-              <h3 class="product__name">Smartwatch</h3>
-              <p class="product__desc">Notificações e monitor de atividades no pulso. Várias cores.</p>
-              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Smartwatch" target="_blank" rel="noopener">
-                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
-                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
-              </a>
-            </div>
-          </li>
-
-          <li class="product" data-category="carregadores" data-reveal>
-            <div class="product__media">
-              <img src="assets/produtos/fonte-usb-c-20w.webp" alt="Caixas da fonte USB-C 20W" width="362" height="482" loading="lazy" decoding="async">
-            </div>
-            <div class="product__body">
-              <span class="product__tag">Carregadores</span>
-              <h3 class="product__name">Fonte USB-C 20W</h3>
-              <p class="product__desc">Carregamento rápido para aparelhos com cabo USB-C.</p>
-              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Fonte USB-C 20W" target="_blank" rel="noopener">
-                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
-                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
-              </a>
-            </div>
-          </li>
-
-          <li class="product" data-category="audio" data-reveal>
-            <div class="product__media">
-              <img src="assets/produtos/mini-caixa-de-som.webp" alt="Mini caixas de som coloridas na palma da mão" width="362" height="482" loading="lazy" decoding="async">
-            </div>
-            <div class="product__body">
-              <span class="product__tag">Fones e som</span>
-              <h3 class="product__name">Mini caixa de som Bluetooth</h3>
-              <p class="product__desc">Pequena no tamanho e disponível em várias cores.</p>
-              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Mini caixa de som Bluetooth" target="_blank" rel="noopener">
-                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
-                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
-              </a>
-            </div>
-          </li>
-
-          <li class="product" data-category="audio" data-reveal>
-            <div class="product__media">
-              <img src="assets/produtos/earpods-lightning.webp" alt="Caixas de fones de ouvido com conector Lightning" width="362" height="482" loading="lazy" decoding="async">
-            </div>
-            <div class="product__body">
-              <span class="product__tag">Fones e som</span>
-              <h3 class="product__name">Fone com conector Lightning</h3>
-              <p class="product__desc">Para iPhone com entrada Lightning.</p>
-              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Fone com conector Lightning" target="_blank" rel="noopener">
-                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
-                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
-              </a>
-            </div>
-          </li>
-
-          <li class="product" data-category="carregadores" data-reveal>
-            <div class="product__media">
-              <img src="assets/produtos/power-bank-10000.webp" alt="Power bank de 10.000mAh e sua caixa" width="362" height="482" loading="lazy" decoding="async">
-            </div>
-            <div class="product__body">
-              <span class="product__tag">Carregadores</span>
-              <h3 class="product__name">Power bank 10.000mAh</h3>
-              <p class="product__desc">Bateria extra para o celular durar o dia todo.</p>
-              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Power bank 10.000mAh" target="_blank" rel="noopener">
-                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
-                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
-              </a>
-            </div>
-          </li>
-
-          <li class="product" data-category="variedades" data-reveal>
-            <div class="product__media">
-              <img src="assets/produtos/game-stick.webp" alt="Caixas do video game retrô com controles sem fio" width="362" height="482" loading="lazy" decoding="async">
-            </div>
-            <div class="product__body">
-              <span class="product__tag">Variedades</span>
-              <h3 class="product__name">Video game retrô + 2 controles</h3>
-              <p class="product__desc">Game stick com controles sem fio: é só ligar na TV e jogar.</p>
-              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Video game retrô com 2 controles" target="_blank" rel="noopener">
-                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
-                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
-              </a>
-            </div>
-          </li>
-
-          <li class="product" data-category="capas" data-reveal>
-            <div class="product__media">
-              <img src="assets/produtos/capa-iphone-transparente.webp" alt="iPhone com capa transparente" width="362" height="482" loading="lazy" decoding="async">
-            </div>
-            <div class="product__body">
-              <span class="product__tag">Capas</span>
-              <h3 class="product__name">Capa transparente para iPhone</h3>
-              <p class="product__desc">Protege sem esconder o visual do aparelho.</p>
-              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Capa transparente para iPhone" target="_blank" rel="noopener">
-                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
-                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
-              </a>
-            </div>
-          </li>
-
-          <li class="product" data-category="celulares" data-reveal>
-            <div class="product__media">
-              <img src="assets/produtos/celulares-redmi.webp" alt="Três smartphones Redmi em cores diferentes" width="362" height="482" loading="lazy" decoding="async">
-            </div>
-            <div class="product__body">
-              <span class="product__tag">Celulares</span>
-              <h3 class="product__name">Smartphones Xiaomi Redmi</h3>
-              <p class="product__desc">Modelos e cores variados. Pergunte pelo seu favorito.</p>
-              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Smartphones Xiaomi Redmi" target="_blank" rel="noopener">
-                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
-                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
-              </a>
-            </div>
-          </li>
-
-          <li class="product" data-category="carregadores" data-reveal>
-            <div class="product__media">
-              <img src="assets/produtos/cabo-usb-c-lightning.webp" alt="Caixa do cabo USB-C para Lightning" width="362" height="482" loading="lazy" decoding="async">
-            </div>
-            <div class="product__body">
-              <span class="product__tag">Cabos</span>
-              <h3 class="product__name">Cabo USB-C para Lightning</h3>
-              <p class="product__desc">Para carregar o iPhone em fontes USB-C.</p>
-              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Cabo USB-C para Lightning" target="_blank" rel="noopener">
-                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
-                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
-              </a>
-            </div>
-          </li>
-
-          <li class="product" data-category="smartwatch" data-reveal>
-            <div class="product__media">
-              <img src="assets/produtos/pulseiras-smartwatch.webp" alt="Pulseiras de silicone coloridas para smartwatch" width="362" height="482" loading="lazy" decoding="async">
-            </div>
-            <div class="product__body">
-              <span class="product__tag">Smartwatch</span>
-              <h3 class="product__name">Pulseiras de silicone</h3>
-              <p class="product__desc">Para smartwatch, em várias cores.</p>
-              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Pulseira de silicone para smartwatch" target="_blank" rel="noopener">
-                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
-                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
-              </a>
-            </div>
-          </li>
-
-          <li class="product" data-category="audio" data-reveal>
-            <div class="product__media">
-              <img src="assets/produtos/fones-com-fio.webp" alt="Fones de ouvido com fio em embalagens transparentes" width="362" height="482" loading="lazy" decoding="async">
-            </div>
-            <div class="product__body">
-              <span class="product__tag">Fones e som</span>
-              <h3 class="product__name">Fones de ouvido com fio</h3>
-              <p class="product__desc">Vários modelos para o dia a dia.</p>
-              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Fone de ouvido com fio" target="_blank" rel="noopener">
-                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
-                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
-              </a>
-            </div>
-          </li>
-
-          <li class="product" data-category="audio" data-reveal>
-            <div class="product__media">
-              <img src="assets/produtos/fones-de-ouvido.webp" alt="Caixas de fones de ouvido intra-auriculares" width="362" height="482" loading="lazy" decoding="async">
-            </div>
-            <div class="product__body">
-              <span class="product__tag">Fones e som</span>
-              <h3 class="product__name">Fones intra-auriculares</h3>
-              <p class="product__desc">Para músicas, vídeos e chamadas.</p>
-              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Fone intra-auricular" target="_blank" rel="noopener">
-                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
-                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
-              </a>
-            </div>
-          </li>
-
-          <li class="product" data-category="carregadores" data-reveal>
-            <div class="product__media">
-              <img src="assets/produtos/power-bank-5000.webp" alt="Carregador portátil de 5.000mAh e sua caixa" width="362" height="482" loading="lazy" decoding="async">
-            </div>
-            <div class="product__body">
-              <span class="product__tag">Carregadores</span>
-              <h3 class="product__name">Carregador portátil 5.000mAh</h3>
-              <p class="product__desc">Compacto e leve para levar no bolso.</p>
-              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Carregador portátil 5.000mAh" target="_blank" rel="noopener">
-                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
-                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
-              </a>
-            </div>
-          </li>
-
-          <li class="product" data-category="carregadores" data-reveal>
-            <div class="product__media">
-              <img src="assets/produtos/cabo-usb.webp" alt="Cabos USB em embalagens vermelhas" width="362" height="482" loading="lazy" decoding="async">
-            </div>
-            <div class="product__body">
-              <span class="product__tag">Cabos</span>
-              <h3 class="product__name">Cabos USB</h3>
-              <p class="product__desc">Cabos de carga e dados para diversos aparelhos.</p>
-              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Cabo USB" target="_blank" rel="noopener">
-                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
-                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
-              </a>
-            </div>
-          </li>
-
-          <li class="product" data-category="capas" data-reveal>
-            <div class="product__media">
-              <img src="assets/produtos/capa-tablet.webp" alt="Capa rosa para tablet" width="362" height="482" loading="lazy" decoding="async">
-            </div>
-            <div class="product__body">
-              <span class="product__tag">Capas</span>
-              <h3 class="product__name">Capa para tablet</h3>
-              <p class="product__desc">Proteção com estilo para o seu tablet.</p>
-              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Capa para tablet" target="_blank" rel="noopener">
-                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
-                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
-              </a>
-            </div>
-          </li>
-
-          <li class="product" data-category="variedades" data-reveal>
-            <div class="product__media">
-              <img src="assets/produtos/copo-termico.webp" alt="Copo térmico Beer Pint azul com sua caixa" width="362" height="482" loading="lazy" decoding="async">
-            </div>
-            <div class="product__body">
-              <span class="product__tag">Variedades</span>
-              <h3 class="product__name">Copo térmico Beer Pint</h3>
-              <p class="product__desc">Sua bebida gelada por mais tempo.</p>
-              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Copo térmico Beer Pint" target="_blank" rel="noopener">
-                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
-                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
-              </a>
-            </div>
-          </li>
+        <ul class="product-grid" data-products aria-busy="true">
+          <li class="product product--skeleton" aria-hidden="true"><div class="product__media"></div><div class="product__body"><span></span><span></span><span></span></div></li>
+          <li class="product product--skeleton" aria-hidden="true"><div class="product__media"></div><div class="product__body"><span></span><span></span><span></span></div></li>
+          <li class="product product--skeleton" aria-hidden="true"><div class="product__media"></div><div class="product__body"><span></span><span></span><span></span></div></li>
+          <li class="product product--skeleton" aria-hidden="true"><div class="product__media"></div><div class="product__body"><span></span><span></span><span></span></div></li>
 
           <!-- cartão final (sempre visível, não é afetado pelos filtros) -->
           <li class="grid-cta" data-reveal>
@@ -556,7 +299,34 @@
             </a>
           </li>
         </ul>
+        <noscript><p class="products__notice">Ative o JavaScript para ver os produtos ou fale com a gente no WhatsApp: (85) 99803-3405.</p></noscript>
       </div>
+
+      <template id="produto-modelo">
+        <li class="product">
+          <div class="product__media">
+            <div class="product__slides"></div>
+            <span class="product__badge" hidden></span>
+            <span class="product__count" aria-hidden="true" hidden></span>
+            <button class="product__arrow product__arrow--prev" type="button" aria-label="Foto anterior" hidden><svg class="i" aria-hidden="true"><use href="#i-chevron-left"/></svg></button>
+            <button class="product__arrow product__arrow--next" type="button" aria-label="Próxima foto" hidden><svg class="i" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
+          </div>
+          <div class="product__body">
+            <span class="product__tag"></span>
+            <h3 class="product__name"></h3>
+            <p class="product__desc" hidden></p>
+            <div class="product__colors" hidden>
+              <div class="product__swatches" role="group" aria-label="Cores disponíveis"></div>
+              <span class="product__color-name"></span>
+            </div>
+            <p class="product__price"></p>
+            <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" target="_blank" rel="noopener">
+              <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+              <span class="product__cta-label"></span>
+            </a>
+          </div>
+        </li>
+      </template>
     </section>
 
     <!-- ===================== ASSISTÊNCIA ===================== -->

@@ -10,3 +10,6 @@ desktop.ini
 # ferramentas (Wrangler / Node), caso sejam usadas
 node_modules/
 .wrangler/
+
+# segredos locais do wrangler (nunca enviar ao git)
+.dev.vars

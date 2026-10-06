@@ -514,36 +514,11 @@
     });
   }
 
-  // Filtro de produtos por categoria
-  function initFilters() {
-    const group = document.querySelector('[data-filters]');
-    const grid = document.querySelector('[data-products]');
-    if (!group || !grid) return;
-    const chips = Array.from(group.querySelectorAll('[data-filter]'));
-    const products = Array.from(grid.querySelectorAll('.product'));
-    const status = document.querySelector('[data-filter-status]');
-
-    group.addEventListener('click', (event) => {
-      const chip = event.target.closest('[data-filter]');
-      if (!chip) return;
-      const filter = chip.dataset.filter;
-      let shown = 0;
-      chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
-      products.forEach((item) => {
-        const match = filter === 'todos' || (item.dataset.category || '').split(/\s+/).includes(filter);
-        item.hidden = !match;
-        if (match) shown++;
-      });
-      grid.classList.toggle('is-filtered', filter !== 'todos');
-      if (status) status.textContent = `${shown} ${shown === 1 ? 'produto' : 'produtos'} em ${chip.textContent.trim()}`;
-    });
-  }
-
-  // Seções e cards surgem suavemente ao entrar na tela
+  // Seções e cards surgem suavemente ao entrar na tela.
+  // Devolve uma função para observar elementos criados depois (os produtos).
   function initReveal() {
-    const items = document.querySelectorAll('[data-reveal]');
-    if (!items.length || !('IntersectionObserver' in window)) return;
-    document.querySelectorAll('.product-grid, .service__grid, .steps__list').forEach((list) => {
+    if (!('IntersectionObserver' in window)) return null;
+    document.querySelectorAll('.service__grid, .steps__list').forEach((list) => {
       Array.from(list.children).forEach((child, i) => child.style.setProperty('--delay', `${(i % 4) * 70}ms`));
     });
     const observer = new IntersectionObserver((entries) => {
@@ -554,7 +529,259 @@
       });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
     root.classList.add('reveal-ready');
-    items.forEach((el) => observer.observe(el));
+    document.querySelectorAll('[data-reveal]').forEach((el) => observer.observe(el));
+    return (el) => observer.observe(el);
+  }
+
+  /* 5. CATÁLOGO ------------------------------------------------ */
+  // Os produtos são cadastrados no painel do lojista (/admin/) e chegam por
+  // /api/produtos. Se a API falhar, usa a cópia publicada com o site.
+  function initCatalog(reveal) {
+    const grid = document.querySelector('[data-products]');
+    const template = document.getElementById('produto-modelo');
+    if (!grid || !template) return;
+    const filtersEl = document.querySelector('[data-filters]');
+    const status = document.querySelector('[data-filter-status]');
+    const cta = grid.querySelector('.grid-cta');
+    const money = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const IMAGE = /^(?:assets\/produtos|img)\/[\w.-]+\.(?:webp|jpe?g|png)$/i;
+    const HEX = /^#[0-9a-f]{6}$/i;
+    let cards = [];
+
+    const load = (url) => fetch(url, { cache: 'no-cache' }).then((response) => {
+      if (!response.ok) throw new Error(`${url} respondeu ${response.status}`);
+      return response.json();
+    });
+
+    load('/api/produtos')
+      .catch((error) => {
+        console.warn('[On Shop Cell] Catálogo ao vivo indisponível, usando a cópia do site.', error);
+        return load('data/produtos.json');
+      })
+      .then(render)
+      .catch((error) => {
+        console.error(error);
+        renderNotice('Não foi possível carregar os produtos agora. Fale com a gente no WhatsApp: (85) 99803-3405.');
+      });
+
+    function waLink(product, color) {
+      const colorText = color ? ` (cor: ${color})` : '';
+      const priceText = typeof product.preco === 'number' ? ` · ${money.format(product.preco)}` : '';
+      const text = product.disponivel === false
+        ? `Olá! Vi no site que o produto ${product.titulo}${colorText} está esgotado. Pode me avisar quando chegar?`
+        : `Olá! Vi no site da On Shop Cell e tenho interesse em: ${product.titulo}${colorText}${priceText}. Está disponível?`;
+      return `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
+    }
+
+    function buildCard(product, categoryName) {
+      const card = template.content.firstElementChild.cloneNode(true);
+      const $ = (selector) => card.querySelector(selector);
+      const soldOut = product.disponivel === false;
+      card.dataset.category = product.categoria;
+      card.classList.toggle('is-soldout', soldOut);
+
+      // fotos: carrossel deslizável (setas aparecem no computador)
+      const slides = $('.product__slides');
+      const images = (product.imagens || []).filter((src) => IMAGE.test(src));
+      images.forEach((src, i) => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = images.length > 1 ? `${product.titulo} (foto ${i + 1} de ${images.length})` : product.titulo;
+        img.width = 800;
+        img.height = 1000;
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.draggable = false;
+        slides.appendChild(img);
+      });
+      if (!images.length) card.classList.add('no-photo');
+      if (images.length > 1) {
+        const count = $('.product__count');
+        count.hidden = false;
+        count.textContent = `1/${images.length}`;
+        $('.product__arrow--prev').hidden = false;
+        $('.product__arrow--next').hidden = false;
+        let pending = 0;
+        slides.addEventListener('scroll', () => {
+          if (pending) return;
+          pending = requestAnimationFrame(() => {
+            pending = 0;
+            count.textContent = `${Math.round(slides.scrollLeft / Math.max(1, slides.clientWidth)) + 1}/${images.length}`;
+          });
+        }, { passive: true });
+      }
+
+      const badge = $('.product__badge');
+      if (soldOut || product.destaque) {
+        badge.hidden = false;
+        badge.textContent = soldOut ? 'Esgotado' : 'Destaque';
+        badge.classList.toggle('product__badge--muted', soldOut);
+      }
+
+      $('.product__tag').textContent = categoryName;
+      $('.product__name').textContent = product.titulo;
+      if (product.descricao) {
+        const desc = $('.product__desc');
+        desc.textContent = product.descricao;
+        desc.hidden = false;
+      }
+
+      // preço ("de/por" quando houver preço antigo)
+      const price = $('.product__price');
+      if (typeof product.preco === 'number') {
+        if (typeof product.precoAntigo === 'number' && product.precoAntigo > product.preco) {
+          const before = document.createElement('s');
+          before.textContent = money.format(product.precoAntigo);
+          const label = document.createElement('span');
+          label.className = 'sr-only';
+          label.textContent = 'De ';
+          const now = document.createElement('span');
+          now.className = 'sr-only';
+          now.textContent = ' por ';
+          price.append(label, before, now);
+        }
+        const value = document.createElement('strong');
+        value.textContent = money.format(product.preco);
+        price.append(value);
+      } else {
+        price.textContent = 'Consulte o preço';
+        price.classList.add('product__price--ask');
+      }
+
+      // cores: tocar numa cor coloca ela na mensagem do WhatsApp
+      const link = $('.product__cta');
+      const colors = (product.cores || []).filter((c) => c && c.nome && HEX.test(c.hex));
+      let chosen = colors.length === 1 ? colors[0].nome : null;
+      if (colors.length) {
+        $('.product__colors').hidden = false;
+        const swatches = $('.product__swatches');
+        const name = $('.product__color-name');
+        const summary = () => (chosen ? `Cor: ${chosen}` : `${colors.length} cores`);
+        colors.forEach((color) => {
+          const swatch = document.createElement('button');
+          swatch.type = 'button';
+          swatch.className = 'swatch';
+          swatch.title = color.nome;
+          swatch.dataset.color = color.nome;
+          swatch.style.setProperty('--swatch', color.hex);
+          swatch.setAttribute('aria-label', color.nome);
+          swatch.setAttribute('aria-pressed', String(color.nome === chosen));
+          swatches.appendChild(swatch);
+        });
+        name.textContent = summary();
+        swatches.addEventListener('click', (event) => {
+          const swatch = event.target.closest('.swatch');
+          if (!swatch) return;
+          chosen = chosen === swatch.dataset.color && colors.length > 1 ? null : swatch.dataset.color;
+          swatches.querySelectorAll('.swatch').forEach((s) => s.setAttribute('aria-pressed', String(s.dataset.color === chosen)));
+          name.textContent = summary();
+          link.href = waLink(product, chosen);
+        });
+      }
+
+      link.href = waLink(product, chosen);
+      const extra = document.createElement('span');
+      extra.className = 'hide-sm';
+      extra.textContent = soldOut ? ' quando chegar' : ' no WhatsApp';
+      $('.product__cta-label').append(soldOut ? 'Avise-me' : 'Pedir', extra);
+      return card;
+    }
+
+    function render(data) {
+      const categories = Array.isArray(data.categorias) ? data.categorias : [];
+      const names = new Map(categories.map((c) => [c.id, c.nome]));
+      const products = (Array.isArray(data.produtos) ? data.produtos : []).filter((p) => p && p.titulo);
+      grid.querySelectorAll('.product, .products__notice').forEach((el) => el.remove());
+      if (!products.length) {
+        renderNotice('Em breve, novos produtos por aqui. Enquanto isso, fale com a gente no WhatsApp!');
+        return;
+      }
+      cards = products.map((product, i) => {
+        const card = buildCard(product, names.get(product.categoria) || '');
+        card.style.setProperty('--delay', `${(i % 4) * 70}ms`);
+        card.setAttribute('data-reveal', '');
+        grid.insertBefore(card, cta);
+        if (reveal) reveal(card);
+        return card;
+      });
+      grid.setAttribute('aria-busy', 'false');
+      buildFilters(categories, products);
+      fitCta();
+    }
+
+    function renderNotice(message) {
+      grid.querySelectorAll('.product, .products__notice').forEach((el) => el.remove());
+      cards = [];
+      const notice = document.createElement('li');
+      notice.className = 'products__notice';
+      notice.textContent = message;
+      grid.insertBefore(notice, cta);
+      grid.setAttribute('aria-busy', 'false');
+      if (cta) cta.style.gridColumn = '1 / -1';
+    }
+
+    // filtros: só as categorias que têm produto
+    function buildFilters(categories, products) {
+      if (!filtersEl) return;
+      const used = new Set(products.map((p) => p.categoria));
+      const options = [{ id: 'todos', nome: 'Todos' }, ...categories.filter((c) => used.has(c.id))];
+      filtersEl.replaceChildren(...options.map((option, i) => {
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'chip';
+        chip.dataset.filter = option.id;
+        chip.textContent = option.nome;
+        chip.setAttribute('aria-pressed', String(i === 0));
+        return chip;
+      }));
+      filtersEl.hidden = options.length <= 2;
+    }
+
+    if (filtersEl) {
+      filtersEl.addEventListener('click', (event) => {
+        const chip = event.target.closest('[data-filter]');
+        if (!chip) return;
+        const filter = chip.dataset.filter;
+        let shown = 0;
+        filtersEl.querySelectorAll('[data-filter]').forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+        cards.forEach((card) => {
+          const match = filter === 'todos' || card.dataset.category === filter;
+          card.hidden = !match;
+          if (match) shown++;
+        });
+        if (status) status.textContent = `${shown} ${shown === 1 ? 'produto' : 'produtos'} em ${chip.textContent.trim()}`;
+        fitCta();
+      });
+    }
+
+    // setas do carrossel (no fim, volta para a primeira foto)
+    grid.addEventListener('click', (event) => {
+      const arrow = event.target.closest('.product__arrow');
+      if (!arrow) return;
+      const slides = arrow.closest('.product__media').querySelector('.product__slides');
+      const width = Math.max(1, slides.clientWidth);
+      const last = slides.children.length - 1;
+      let index = Math.round(slides.scrollLeft / width) + (arrow.classList.contains('product__arrow--next') ? 1 : -1);
+      if (index > last) index = 0;
+      if (index < 0) index = last;
+      slides.scrollTo({ left: index * width, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+    });
+
+    // o cartão "Tem muito mais na loja" ocupa as colunas que sobram na última linha
+    function fitCta() {
+      if (!cta || !cards.length) return;
+      const columns = getComputedStyle(grid).gridTemplateColumns.split(' ').filter(Boolean).length || 1;
+      const rest = cards.filter((card) => !card.hidden).length % columns;
+      const span = rest ? columns - rest : columns;
+      cta.style.gridColumn = `span ${span}`;
+      cta.classList.toggle('is-wide', span > 1);
+    }
+    let resizeFrame = 0;
+    window.addEventListener('resize', () => {
+      cancelAnimationFrame(resizeFrame);
+      resizeFrame = requestAnimationFrame(fitCta);
+    });
   }
 
   function initYear() {
@@ -583,7 +810,8 @@
   run(initWhatsApp);
   run(initHeader);
   run(initMenu);
-  run(initFilters);
-  run(initReveal);
+  let reveal = null;
+  run(() => { reveal = initReveal(); });
+  run(() => initCatalog(reveal));
   run(initYear);
 })();
