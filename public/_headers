@@ -1,10 +1,15 @@
 # Cabeçalhos HTTP (lidos automaticamente pelo Cloudflare Pages)
 
+# Política de segurança (CSP): o site só carrega arquivos dele mesmo. Mesmo que
+# algum texto malicioso fosse parar na página, o navegador não executaria
+# scripts de fora nem embutidos.
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: microphone=(), geolocation=()
+  Permissions-Policy: microphone=(), geolocation=(), payment=(), usb=()
   X-Frame-Options: SAMEORIGIN
+  Strict-Transport-Security: max-age=31536000
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data: blob:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; media-src 'none'; object-src 'none'; frame-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests
 
 # Frames da animação: guardados no navegador por 30 dias.
 # Ao substituir os frames, aumente "version" em script.js (CONFIG.frames.version).

@@ -12,6 +12,23 @@
    10. Movimento reduzido
    ============================================================= */
 
+/* Fontes servidas pelo próprio site (licença OFL em assets/fontes):
+   o navegador do visitante não precisa falar com o Google. */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("assets/fontes/inter-latin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600 800;
+  font-display: swap;
+  src: url("assets/fontes/montserrat-latin.woff2") format("woff2");
+}
+
 /* 1. TOKENS ---------------------------------------------------- */
 :root {
   /* identidade visual (cores tiradas do logo) */

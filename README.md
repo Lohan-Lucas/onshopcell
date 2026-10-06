@@ -21,16 +21,48 @@ App instalável no celular (PWA) para o dono cadastrar, editar e excluir produto
 - Android (Chrome): abra o endereço do app e toque em **Instalar o app** (ou menu ⋮ do Chrome → *Instalar app*).
 - iPhone (Safari): abra o endereço, toque em **Compartilhar** e depois em **Adicionar à Tela de Início**.
 
-**Senha e segurança**
+**Senha**
 
-- A senha fica guardada só na Cloudflare, criptografada, nunca no código. Para trocar (desconecta todos os aparelhos):
-  ```bash
-  npx wrangler pages secret put ADMIN_PASSWORD --project-name onshopcell
-  ```
-- O login dura 30 dias por aparelho, num cookie seguro.
-- A senha é bloqueada após 8 erros em 15 minutos (100 por dia no total).
-- O app só aceita alterações vindas do próprio site, carrega apenas arquivos do site e não aparece no Google.
-- Duas gravações ao mesmo tempo nunca se sobrescrevem: o banco confere a versão antes de gravar.
+A senha fica guardada só na Cloudflare, criptografada, nunca no código. Para trocar (desconecta todos os aparelhos):
+
+```bash
+npx wrangler pages secret put ADMIN_PASSWORD --project-name onshopcell
+```
+
+Perdeu o celular ou acha que alguém viu a senha? No app, menu ⋮ → **Sair de todos os aparelhos**, e depois troque a senha.
+
+## Segurança
+
+| Proteção | Como funciona |
+|---|---|
+| SQL injection | toda consulta ao banco usa parâmetros (`prepare` + `bind`): nada digitado entra no texto do SQL |
+| Login | senha comparada em tempo constante; bloqueio após 8 erros em 15 min por endereço (100 por dia no total) |
+| Sessão | cookie `HttpOnly`, `Secure`, `SameSite=Strict`, assinado (HMAC) **e** registrado no banco: "Sair" invalida na hora; trocar a senha invalida todas |
+| CSRF | alterações só são aceitas com a origem do próprio site |
+| XSS | textos do catálogo sempre inseridos como texto (nunca como HTML) + política de segurança (CSP) que bloqueia scripts de fora ou embutidos |
+| Dados enviados | formato e tamanho conferidos no servidor (login até 2 KB, catálogo até 1,5 MB, foto até 2,5 MB); endereços de imagem, cores e preços validados |
+| Fotos | só WebP/JPEG verificados pelo conteúdo do arquivo; nome criado pelo servidor; servidas com `nosniff` e sem permitir uso por outros sites |
+| Concorrência | o banco confere a versão antes de gravar: duas gravações ao mesmo tempo nunca se sobrescrevem |
+| Privacidade | o site não faz requisições a terceiros (fontes servidas pelo próprio site), não usa cookies de rastreamento e não guarda dados de clientes (os pedidos vão pelo WhatsApp); fotos enviadas pelo app perdem os dados de GPS |
+
+**Testes de segurança** (ataques de verdade, só contra o servidor local):
+
+```bash
+npx wrangler pages dev          # em um terminal
+node testes/seguranca.mjs       # em outro
+```
+
+Contra o site no ar, só verificações que não alteram nada:
+
+```bash
+node testes/seguranca.mjs https://onshopcell.pages.dev --producao
+```
+
+**Desbloquear o login** (se alguém tentar adivinhar a senha e travar o acesso por um dia):
+
+```bash
+npx wrangler d1 execute loja --remote --command "DELETE FROM falhas_login"
+```
 
 ## Estrutura
 
@@ -38,15 +70,17 @@ App instalável no celular (PWA) para o dono cadastrar, editar e excluir produto
 site-marcelo/
 ├── public/                    o que vai para o ar
 │   ├── index.html, styles.css, script.js   site + animação + vitrine
+│   ├── inicio.js              ajustes antes da primeira pintura (modo estático, tela de carregamento)
 │   ├── frames/                240 frames da animação (frame-0001.webp …)
-│   ├── assets/                ícones, imagem de compartilhamento e fotos antigas
+│   ├── assets/                ícones, fontes, imagem de compartilhamento e fotos antigas
 │   ├── data/produtos.json     catálogo inicial (reserva se a API falhar)
 │   ├── admin/                 app do lojista
 │   └── _headers, 404.html, robots.txt
 ├── functions/                 API (Cloudflare Pages Functions)
 │   ├── api/[[rota]].js        /api/produtos e /api/admin/*
 │   └── img/[[foto]].js        fotos enviadas pelo app (/img/…)
-├── lib/loja.js                regras do servidor (catálogo, login, fotos)
+├── lib/loja.js                regras do servidor (catálogo, login, sessões, fotos)
+├── testes/seguranca.mjs       testes de segurança (SQL injection, login, uploads, cabeçalhos…)
 ├── wrangler.toml              configuração da Cloudflare (bancos D1 e KV)
 └── .github/workflows/deploy.yml
 ```
@@ -57,6 +91,7 @@ site-marcelo/
 |---|---|
 | Produtos e categorias | banco **D1** `loja`, tabela `catalogo` |
 | Versões anteriores (últimas 50) | banco **D1** `loja`, tabela `historico` |
+| Aparelhos com login ativo | banco **D1** `loja`, tabela `sessoes` |
 | Fotos enviadas pelo app | **KV** `LOJA` (endereços `/img/…`) |
 | Fotos iniciais (recortes do Instagram) | `public/assets/produtos/` |
 

@@ -463,6 +463,21 @@
     setTimeout(() => URL.revokeObjectURL(link.href), 5000);
   });
   $('menu-sair').addEventListener('click', sair);
+  // para quando perder o celular ou desconfiar que alguém viu a senha
+  $('menu-sair-todos').addEventListener('click', async () => {
+    if (!confirm('Desconectar o app de TODOS os aparelhos, inclusive este?\nUse se perdeu o celular ou acha que alguém viu a senha.')) return;
+    try {
+      await comSessao(() => api('/api/admin/sair-de-todos', { metodo: 'POST' }));
+    } catch (erro) {
+      avisar(erro.message, true);
+      return;
+    }
+    estado.catalogo = null;
+    ui.app.hidden = true;
+    await pedirSenha('Todos os aparelhos foram desconectados. Entre de novo para continuar.');
+    await carregar();
+    ui.app.hidden = false;
+  });
 
   /* ---------- editor ---------- */
   ui.btnNovo.addEventListener('click', () => abrirEditor(null));

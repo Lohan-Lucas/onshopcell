@@ -26,27 +26,13 @@
   <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap">
+  <!-- fontes servidas pelo próprio site: o visitante não precisa falar com o Google -->
+  <link rel="preload" href="assets/fontes/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fontes/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
 
-  <script>
-    /* Roda antes da primeira pintura: liga o modo JS, decide se a animação
-       completa será usada e mostra a tela de carregamento. */
-    (function (h) {
-      h.className = h.className.replace(/\bno-js\b/, 'js');
-      var c = navigator.connection || {};
-      var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var saveData = c.saveData === true || /(^|-)2g$/.test(c.effectiveType || '');
-      if (reduce || saveData) {
-        h.classList.add('motion-static');
-      } else {
-        h.classList.add('is-loading');
-        setTimeout(function () { h.classList.remove('is-loading'); }, 12000); /* trava de segurança */
-      }
-    })(document.documentElement);
-  </script>
+  <!-- roda antes da primeira pintura (arquivo separado: a política de segurança não aceita script embutido) -->
+  <script src="inicio.js"></script>
   <script src="script.js" defer></script>
 
   <script type="application/ld+json">
