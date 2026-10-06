@@ -1,0 +1,6 @@
+# Quebras de linha LF em todos os sistemas (o _headers da Cloudflare espera LF)
+* text=auto eol=lf
+
+*.webp binary
+*.png  binary
+*.jpg  binary

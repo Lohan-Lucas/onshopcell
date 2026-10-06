@@ -1,0 +1,12 @@
+# sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# editores
+.vscode/
+.idea/
+
+# ferramentas (Wrangler / Node), caso sejam usadas
+node_modules/
+.wrangler/

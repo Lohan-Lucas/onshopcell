@@ -1,0 +1,16 @@
+# Cabeçalhos HTTP (Cloudflare Pages / Netlify leem este arquivo automaticamente)
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  X-Frame-Options: SAMEORIGIN
+
+# Frames da animação: guardados no navegador por 30 dias.
+# Ao substituir os frames, mude "version" em script.js (CONFIG.frames.version).
+/frames/*
+  Cache-Control: public, max-age=2592000
+
+# Fotos e ícones: 7 dias
+/assets/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400

@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="pt-BR" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>On Shop Cell | Acessórios para celular e assistência em Maracanaú/CE</title>
+  <meta name="description" content="Acessórios para celular, smartphones e assistência especializada em Maracanaú/CE. Peça pelo WhatsApp e receba com entrega grátis.">
+  <meta name="theme-color" content="#05070b">
+  <meta name="color-scheme" content="dark">
+
+  <!-- Troque "onshopcell.pages.dev" pelo endereço final do site (ver README.md) -->
+  <link rel="canonical" href="https://onshopcell.pages.dev/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="On Shop Cell">
+  <meta property="og:url" content="https://onshopcell.pages.dev/">
+  <meta property="og:title" content="On Shop Cell | Acessórios e Assistência Especializada">
+  <meta property="og:description" content="Acessórios, smartphones e assistência para o seu celular em Maracanaú/CE. Entrega grátis: peça pelo WhatsApp.">
+  <meta property="og:image" content="https://onshopcell.pages.dev/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Logo On Shop Cell, Assistência Especializada">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="styles.css">
+
+  <script>
+    /* Roda antes da primeira pintura: liga o modo JS, decide se a animação
+       completa será usada e mostra a tela de carregamento. */
+    (function (h) {
+      h.className = h.className.replace(/\bno-js\b/, 'js');
+      var c = navigator.connection || {};
+      var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var saveData = c.saveData === true || /(^|-)2g$/.test(c.effectiveType || '');
+      if (reduce || saveData) {
+        h.classList.add('motion-static');
+      } else {
+        h.classList.add('is-loading');
+        setTimeout(function () { h.classList.remove('is-loading'); }, 12000); /* trava de segurança */
+      }
+    })(document.documentElement);
+  </script>
+  <script src="script.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobilePhoneStore",
+    "name": "On Shop Cell",
+    "alternateName": "On Shopcell Oficial",
+    "description": "Acessórios para celular, smartphones e assistência especializada em Maracanaú/CE, com entrega grátis.",
+    "url": "https://onshopcell.pages.dev/",
+    "logo": "https://onshopcell.pages.dev/assets/icon-512.png",
+    "image": "https://onshopcell.pages.dev/assets/og-image.jpg",
+    "telephone": "+55 85 99803-3405",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Maracanaú",
+      "addressRegion": "CE",
+      "addressCountry": "BR"
+    },
+    "areaServed": { "@type": "City", "name": "Maracanaú" },
+    "sameAs": ["https://www.instagram.com/onshopcelloficial/"]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#produtos">Pular para os produtos</a>
+
+  <!-- Ícones e logo (reutilizados com <use href="#...">) -->
+  <svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="g-blue" gradientUnits="userSpaceOnUse" x1="0" y1="4" x2="0" y2="108">
+        <stop offset="0" stop-color="#4aa0ff"/>
+        <stop offset="1" stop-color="#0057d6"/>
+      </linearGradient>
+      <linearGradient id="g-silver" gradientUnits="userSpaceOnUse" x1="0" y1="18" x2="0" y2="106">
+        <stop offset="0" stop-color="#ffffff"/>
+        <stop offset="1" stop-color="#aab1bb"/>
+      </linearGradient>
+    </defs>
+
+    <!-- Marca "ON": botão power + N + trilhas de circuito -->
+    <symbol id="logo-on" viewBox="14 2 206 106">
+      <path d="M82.16 33.63A36 36 0 1 1 37.84 33.63" fill="none" stroke="url(#g-blue)" stroke-width="16" stroke-linecap="round"/>
+      <path d="M60 12v44" fill="none" stroke="url(#g-blue)" stroke-width="16" stroke-linecap="round"/>
+      <path d="M112 106V18h22l24 48V18h22v88h-22l-24-48v48z" fill="url(#g-silver)"/>
+      <path d="M184 30h10l10-10v-8M184 46h16l12-12M184 62h22M184 78h12l8 8" fill="none" stroke="#9aa4b1" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+      <g fill="#3d96ff"><circle cx="204" cy="9" r="3.6"/><circle cx="214" cy="32" r="3.6"/><circle cx="210" cy="62" r="3.6"/><circle cx="206" cy="88" r="3.6"/></g>
+    </symbol>
+
+    <symbol id="i-whatsapp" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.59-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.42.25-.69.25-1.29.18-1.41-.08-.13-.28-.2-.58-.35zM12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88zm8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.89a11.82 11.82 0 0 0-3.48-8.41z"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-screen" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2.5"/><path d="m9.5 6.5 3 3.5-2.5 2 4 4.5"/></symbol>
+    <symbol id="i-battery" viewBox="0 0 24 24"><rect x="2" y="7" width="16" height="10" rx="2"/><path d="M22 11v2"/><path d="m10.5 9-2 3h3l-2 3"/></symbol>
+    <symbol id="i-plug" viewBox="0 0 24 24"><path d="M9 2v5M15 2v5"/><path d="M6 7h12v3a6 6 0 0 1-12 0z"/><path d="M12 16v6"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"/><circle cx="12" cy="13" r="3"/></symbol>
+    <symbol id="i-chip" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></symbol>
+    <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
+  </svg>
+
+  <!-- Tela de carregamento (aparece só enquanto os frames da animação carregam) -->
+  <div class="loader" aria-hidden="true">
+    <div class="loader__box">
+      <svg class="loader__mark"><use href="#logo-on"/></svg>
+      <p class="loader__word">SHOP <b>CELL</b></p>
+      <div class="loader__track"><span class="loader__fill" data-loader-fill></span></div>
+      <p class="loader__pct"><span data-loader-pct>0</span>%</p>
+    </div>
+  </div>
+
+  <!-- ===================== CABEÇALHO ===================== -->
+  <header class="site-header" data-header>
+    <div class="container site-header__inner">
+      <a class="brand" href="#inicio" aria-label="On Shop Cell, voltar ao início">
+        <svg class="brand__mark" aria-hidden="true"><use href="#logo-on"/></svg>
+        <span class="brand__word" aria-hidden="true">SHOP <b>CELL</b></span>
+      </a>
+
+      <nav class="nav" id="menu" aria-label="Menu principal">
+        <ul class="nav__list">
+          <li><a href="#produtos">Produtos</a></li>
+          <li><a href="#assistencia">Assistência</a></li>
+          <li><a href="#como-comprar">Entrega</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+        <a class="btn btn--wa nav__cta" href="https://wa.me/5585998033405" data-wa target="_blank" rel="noopener">
+          <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+          Chamar no WhatsApp
+        </a>
+      </nav>
+
+      <div class="site-header__actions">
+        <a class="header-wa" href="https://wa.me/5585998033405" data-wa target="_blank" rel="noopener" aria-label="Chamar no WhatsApp">
+          <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+        </a>
+        <button class="nav-toggle" type="button" aria-controls="menu" aria-expanded="false" aria-label="Abrir menu" data-menu-toggle>
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="conteudo">
+
+    <!-- ===================== ANIMAÇÃO (primeira dobra) =====================
+         Os frames ficam em  frames/frame-0001.webp … frames/frame-0240.webp
+         A "duração" da animação é a altura da seção (.hero em styles.css). -->
+    <section class="hero" id="inicio" data-sequence aria-label="Apresentação On Shop Cell">
+      <div class="hero__stage">
+        <div class="hero__fallback" aria-hidden="true">
+          <div class="hero__fallback-logo">
+            <svg class="hero__fallback-mark"><use href="#logo-on"/></svg>
+            <p class="hero__fallback-word">SHOP <b>CELL</b></p>
+            <p class="hero__fallback-tag">Assistência especializada</p>
+          </div>
+        </div>
+
+        <canvas class="hero__canvas" aria-hidden="true"></canvas>
+        <div class="hero__shade" aria-hidden="true"></div>
+
+        <div class="hero__ui">
+          <div class="container hero__beats">
+            <div class="beat beat--intro" data-beat="0,0.2">
+              <h1 class="beat__heading">
+                <span class="eyebrow">On Shop Cell · Maracanaú/CE</span>
+                <span class="beat__title">Seu celular sempre <span class="text-blue">ON</span>.</span>
+              </h1>
+              <p class="beat__text">Acessórios, smartphones e assistência especializada, com entrega grátis.</p>
+              <div class="beat__actions beat__actions--static">
+                <a class="btn btn--primary" href="#produtos">
+                  Ver produtos
+                  <svg class="i" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+                </a>
+                <a class="btn btn--ghost" href="https://wa.me/5585998033405" data-wa target="_blank" rel="noopener">
+                  <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+                  Falar no WhatsApp
+                </a>
+              </div>
+            </div>
+
+            <div class="beat" data-beat="0.28,0.5">
+              <p class="eyebrow">Acessórios em geral</p>
+              <p class="beat__title">Tudo o que o seu celular precisa.</p>
+              <p class="beat__text">Fones, carregadores, cabos, capinhas, smartwatches, caixinhas de som e muito mais.</p>
+            </div>
+
+            <div class="beat" data-beat="0.56,0.78">
+              <p class="eyebrow">Assistência especializada</p>
+              <p class="beat__title">Deu defeito? Traga pra gente.</p>
+              <p class="beat__text">Troca de tela, bateria, conector de carga e outros reparos, com avaliação do seu aparelho.</p>
+            </div>
+
+            <div class="beat" data-beat="0.85,1">
+              <p class="eyebrow">Entrega grátis</p>
+              <p class="beat__title">Peça pelo WhatsApp. <span class="text-blue">Receba em casa.</span></p>
+              <div class="beat__actions">
+                <a class="btn btn--primary" href="#produtos">
+                  Ver produtos
+                  <svg class="i" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+                </a>
+                <a class="btn btn--wa" href="https://wa.me/5585998033405" data-wa target="_blank" rel="noopener">
+                  <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+                  Chamar no WhatsApp
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="container hero__bar">
+            <span class="hero__hint" data-hint>
+              <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="3" width="12" height="18" rx="6"/><path class="hero__wheel" d="M12 7v3"/></svg>
+              Role para explorar
+            </span>
+            <a class="hero__skip" href="#produtos" aria-label="Pular animação">
+              Pular<span class="hide-sm">&nbsp;animação</span>
+              <svg class="i" aria-hidden="true"><use href="#i-arrow-down"/></svg>
+            </a>
+          </div>
+
+          <div class="hero__progress" aria-hidden="true">
+            <span class="hero__buffer" data-buffer></span>
+            <span class="hero__played" data-progress></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== DIFERENCIAIS ===================== -->
+    <section class="perks" aria-label="Diferenciais">
+      <ul class="container perks__list">
+        <li class="perk">
+          <span class="perk__icon"><svg class="i" aria-hidden="true"><use href="#i-truck"/></svg></span>
+          <span><strong>Entrega grátis</strong><small>Receba sem sair de casa</small></span>
+        </li>
+        <li class="perk">
+          <span class="perk__icon"><svg class="i" aria-hidden="true"><use href="#i-wrench"/></svg></span>
+          <span><strong>Assistência especializada</strong><small>Reparo e manutenção</small></span>
+        </li>
+        <li class="perk">
+          <span class="perk__icon"><svg class="i" aria-hidden="true"><use href="#i-chat"/></svg></span>
+          <span><strong>Atendimento no WhatsApp</strong><small>(85) 99803-3405</small></span>
+        </li>
+        <li class="perk">
+          <span class="perk__icon"><svg class="i" aria-hidden="true"><use href="#i-bag"/></svg></span>
+          <span><strong>Loja online</strong><small>Escolha pelo site ou Instagram</small></span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ===================== PRODUTOS =====================
+         Para adicionar um produto: copie um <li class="product"> inteiro e troque
+         a foto, o nome, a descrição, a categoria (data-category) e o data-product. -->
+    <section class="section products" id="produtos" aria-labelledby="produtos-titulo">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Loja online</p>
+          <h2 class="section-title" id="produtos-titulo">Acessórios em geral</h2>
+          <p class="section-lead">Escolha o produto e finalize o pedido pelo WhatsApp. Preços e disponibilidade direto com a gente.</p>
+        </div>
+
+        <div class="filters" role="group" aria-label="Filtrar produtos por categoria" data-filters>
+          <button class="chip" type="button" aria-pressed="true" data-filter="todos">Todos</button>
+          <button class="chip" type="button" aria-pressed="false" data-filter="celulares">Celulares</button>
+          <button class="chip" type="button" aria-pressed="false" data-filter="carregadores">Carregadores e cabos</button>
+          <button class="chip" type="button" aria-pressed="false" data-filter="audio">Fones e som</button>
+          <button class="chip" type="button" aria-pressed="false" data-filter="smartwatch">Smartwatch</button>
+          <button class="chip" type="button" aria-pressed="false" data-filter="capas">Capas</button>
+          <button class="chip" type="button" aria-pressed="false" data-filter="variedades">Variedades</button>
+        </div>
+        <p class="sr-only" aria-live="polite" data-filter-status></p>
+
+        <ul class="product-grid" data-products>
+          <li class="product" data-category="celulares" data-reveal>
+            <div class="product__media">
+              <span class="product__badge">Destaque</span>
+              <img src="assets/produtos/redmi-note-14.webp" alt="Smartphones Redmi Note 14" width="362" height="482" loading="lazy" decoding="async">
+            </div>
+            <div class="product__body">
+              <span class="product__tag">Celulares</span>
+              <h3 class="product__name">Redmi Note 14 · 8/256GB</h3>
+              <p class="product__desc">8 GB de RAM e 256 GB de armazenamento. Consulte as cores.</p>
+              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Redmi Note 14 8/256GB" target="_blank" rel="noopener">
+                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
+              </a>
+            </div>
+          </li>
+
+          <li class="product" data-category="smartwatch" data-reveal>
+            <div class="product__media">
+              <img src="assets/produtos/smartwatch.webp" alt="Smartwatches nas cores rosa, branco e preto" width="362" height="482" loading="lazy" decoding="async">
+            </div>
+            <div class="product__body">
+              <span class="product__tag">Smartwatch</span>
+              <h3 class="product__name">Smartwatch</h3>
+              <p class="product__desc">Notificações e monitor de atividades no pulso. Várias cores.</p>
+              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Smartwatch" target="_blank" rel="noopener">
+                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
+              </a>
+            </div>
+          </li>
+
+          <li class="product" data-category="carregadores" data-reveal>
+            <div class="product__media">
+              <img src="assets/produtos/fonte-usb-c-20w.webp" alt="Caixas da fonte USB-C 20W" width="362" height="482" loading="lazy" decoding="async">
+            </div>
+            <div class="product__body">
+              <span class="product__tag">Carregadores</span>
+              <h3 class="product__name">Fonte USB-C 20W</h3>
+              <p class="product__desc">Carregamento rápido para aparelhos com cabo USB-C.</p>
+              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Fonte USB-C 20W" target="_blank" rel="noopener">
+                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
+              </a>
+            </div>
+          </li>
+
+          <li class="product" data-category="audio" data-reveal>
+            <div class="product__media">
+              <img src="assets/produtos/mini-caixa-de-som.webp" alt="Mini caixas de som coloridas na palma da mão" width="362" height="482" loading="lazy" decoding="async">
+            </div>
+            <div class="product__body">
+              <span class="product__tag">Fones e som</span>
+              <h3 class="product__name">Mini caixa de som Bluetooth</h3>
+              <p class="product__desc">Pequena no tamanho e disponível em várias cores.</p>
+              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Mini caixa de som Bluetooth" target="_blank" rel="noopener">
+                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
+              </a>
+            </div>
+          </li>
+
+          <li class="product" data-category="audio" data-reveal>
+            <div class="product__media">
+              <img src="assets/produtos/earpods-lightning.webp" alt="Caixas de fones de ouvido com conector Lightning" width="362" height="482" loading="lazy" decoding="async">
+            </div>
+            <div class="product__body">
+              <span class="product__tag">Fones e som</span>
+              <h3 class="product__name">Fone com conector Lightning</h3>
+              <p class="product__desc">Para iPhone com entrada Lightning.</p>
+              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Fone com conector Lightning" target="_blank" rel="noopener">
+                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
+              </a>
+            </div>
+          </li>
+
+          <li class="product" data-category="carregadores" data-reveal>
+            <div class="product__media">
+              <img src="assets/produtos/power-bank-10000.webp" alt="Power bank de 10.000mAh e sua caixa" width="362" height="482" loading="lazy" decoding="async">
+            </div>
+            <div class="product__body">
+              <span class="product__tag">Carregadores</span>
+              <h3 class="product__name">Power bank 10.000mAh</h3>
+              <p class="product__desc">Bateria extra para o celular durar o dia todo.</p>
+              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Power bank 10.000mAh" target="_blank" rel="noopener">
+                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
+              </a>
+            </div>
+          </li>
+
+          <li class="product" data-category="variedades" data-reveal>
+            <div class="product__media">
+              <img src="assets/produtos/game-stick.webp" alt="Caixas do video game retrô com controles sem fio" width="362" height="482" loading="lazy" decoding="async">
+            </div>
+            <div class="product__body">
+              <span class="product__tag">Variedades</span>
+              <h3 class="product__name">Video game retrô + 2 controles</h3>
+              <p class="product__desc">Game stick com controles sem fio: é só ligar na TV e jogar.</p>
+              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Video game retrô com 2 controles" target="_blank" rel="noopener">
+                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
+              </a>
+            </div>
+          </li>
+
+          <li class="product" data-category="capas" data-reveal>
+            <div class="product__media">
+              <img src="assets/produtos/capa-iphone-transparente.webp" alt="iPhone com capa transparente" width="362" height="482" loading="lazy" decoding="async">
+            </div>
+            <div class="product__body">
+              <span class="product__tag">Capas</span>
+              <h3 class="product__name">Capa transparente para iPhone</h3>
+              <p class="product__desc">Protege sem esconder o visual do aparelho.</p>
+              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Capa transparente para iPhone" target="_blank" rel="noopener">
+                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
+              </a>
+            </div>
+          </li>
+
+          <li class="product" data-category="celulares" data-reveal>
+            <div class="product__media">
+              <img src="assets/produtos/celulares-redmi.webp" alt="Três smartphones Redmi em cores diferentes" width="362" height="482" loading="lazy" decoding="async">
+            </div>
+            <div class="product__body">
+              <span class="product__tag">Celulares</span>
+              <h3 class="product__name">Smartphones Xiaomi Redmi</h3>
+              <p class="product__desc">Modelos e cores variados. Pergunte pelo seu favorito.</p>
+              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Smartphones Xiaomi Redmi" target="_blank" rel="noopener">
+                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
+              </a>
+            </div>
+          </li>
+
+          <li class="product" data-category="carregadores" data-reveal>
+            <div class="product__media">
+              <img src="assets/produtos/cabo-usb-c-lightning.webp" alt="Caixa do cabo USB-C para Lightning" width="362" height="482" loading="lazy" decoding="async">
+            </div>
+            <div class="product__body">
+              <span class="product__tag">Cabos</span>
+              <h3 class="product__name">Cabo USB-C para Lightning</h3>
+              <p class="product__desc">Para carregar o iPhone em fontes USB-C.</p>
+              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Cabo USB-C para Lightning" target="_blank" rel="noopener">
+                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
+              </a>
+            </div>
+          </li>
+
+          <li class="product" data-category="smartwatch" data-reveal>
+            <div class="product__media">
+              <img src="assets/produtos/pulseiras-smartwatch.webp" alt="Pulseiras de silicone coloridas para smartwatch" width="362" height="482" loading="lazy" decoding="async">
+            </div>
+            <div class="product__body">
+              <span class="product__tag">Smartwatch</span>
+              <h3 class="product__name">Pulseiras de silicone</h3>
+              <p class="product__desc">Para smartwatch, em várias cores.</p>
+              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Pulseira de silicone para smartwatch" target="_blank" rel="noopener">
+                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
+              </a>
+            </div>
+          </li>
+
+          <li class="product" data-category="audio" data-reveal>
+            <div class="product__media">
+              <img src="assets/produtos/fones-com-fio.webp" alt="Fones de ouvido com fio em embalagens transparentes" width="362" height="482" loading="lazy" decoding="async">
+            </div>
+            <div class="product__body">
+              <span class="product__tag">Fones e som</span>
+              <h3 class="product__name">Fones de ouvido com fio</h3>
+              <p class="product__desc">Vários modelos para o dia a dia.</p>
+              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Fone de ouvido com fio" target="_blank" rel="noopener">
+                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
+              </a>
+            </div>
+          </li>
+
+          <li class="product" data-category="audio" data-reveal>
+            <div class="product__media">
+              <img src="assets/produtos/fones-de-ouvido.webp" alt="Caixas de fones de ouvido intra-auriculares" width="362" height="482" loading="lazy" decoding="async">
+            </div>
+            <div class="product__body">
+              <span class="product__tag">Fones e som</span>
+              <h3 class="product__name">Fones intra-auriculares</h3>
+              <p class="product__desc">Para músicas, vídeos e chamadas.</p>
+              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Fone intra-auricular" target="_blank" rel="noopener">
+                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
+              </a>
+            </div>
+          </li>
+
+          <li class="product" data-category="carregadores" data-reveal>
+            <div class="product__media">
+              <img src="assets/produtos/power-bank-5000.webp" alt="Carregador portátil de 5.000mAh e sua caixa" width="362" height="482" loading="lazy" decoding="async">
+            </div>
+            <div class="product__body">
+              <span class="product__tag">Carregadores</span>
+              <h3 class="product__name">Carregador portátil 5.000mAh</h3>
+              <p class="product__desc">Compacto e leve para levar no bolso.</p>
+              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Carregador portátil 5.000mAh" target="_blank" rel="noopener">
+                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
+              </a>
+            </div>
+          </li>
+
+          <li class="product" data-category="carregadores" data-reveal>
+            <div class="product__media">
+              <img src="assets/produtos/cabo-usb.webp" alt="Cabos USB em embalagens vermelhas" width="362" height="482" loading="lazy" decoding="async">
+            </div>
+            <div class="product__body">
+              <span class="product__tag">Cabos</span>
+              <h3 class="product__name">Cabos USB</h3>
+              <p class="product__desc">Cabos de carga e dados para diversos aparelhos.</p>
+              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Cabo USB" target="_blank" rel="noopener">
+                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
+              </a>
+            </div>
+          </li>
+
+          <li class="product" data-category="capas" data-reveal>
+            <div class="product__media">
+              <img src="assets/produtos/capa-tablet.webp" alt="Capa rosa para tablet" width="362" height="482" loading="lazy" decoding="async">
+            </div>
+            <div class="product__body">
+              <span class="product__tag">Capas</span>
+              <h3 class="product__name">Capa para tablet</h3>
+              <p class="product__desc">Proteção com estilo para o seu tablet.</p>
+              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Capa para tablet" target="_blank" rel="noopener">
+                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
+              </a>
+            </div>
+          </li>
+
+          <li class="product" data-category="variedades" data-reveal>
+            <div class="product__media">
+              <img src="assets/produtos/copo-termico.webp" alt="Copo térmico Beer Pint azul com sua caixa" width="362" height="482" loading="lazy" decoding="async">
+            </div>
+            <div class="product__body">
+              <span class="product__tag">Variedades</span>
+              <h3 class="product__name">Copo térmico Beer Pint</h3>
+              <p class="product__desc">Sua bebida gelada por mais tempo.</p>
+              <a class="btn btn--wa btn--sm product__cta" href="https://wa.me/5585998033405" data-wa data-product="Copo térmico Beer Pint" target="_blank" rel="noopener">
+                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+                <span>Pedir<span class="hide-sm"> no WhatsApp</span></span>
+              </a>
+            </div>
+          </li>
+
+          <!-- cartão final (sempre visível, não é afetado pelos filtros) -->
+          <li class="grid-cta" data-reveal>
+            <span class="icon-box"><svg class="i" aria-hidden="true"><use href="#i-chat"/></svg></span>
+            <div class="grid-cta__text">
+              <h3>Tem muito mais na loja</h3>
+              <p>Não achou o que procura? Pergunte pelo WhatsApp.</p>
+            </div>
+            <a class="btn btn--primary btn--sm" href="https://wa.me/5585998033405" data-wa="Olá! Estou procurando um produto que não encontrei no site: " target="_blank" rel="noopener">
+              <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+              Perguntar
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================== ASSISTÊNCIA ===================== -->
+    <section class="section service" id="assistencia" aria-labelledby="assistencia-titulo">
+      <div class="container service__layout">
+        <div class="service__intro" data-reveal>
+          <p class="eyebrow">Assistência especializada</p>
+          <h2 class="section-title" id="assistencia-titulo">Seu celular em boas mãos.</h2>
+          <p class="section-lead">Tela quebrada, bateria fraca ou aparelho que não carrega? Conte o que aconteceu pelo WhatsApp e receba um orçamento.</p>
+          <a class="btn btn--primary btn--lg" href="https://wa.me/5585998033405" data-wa="Olá! Gostaria de um orçamento de assistência técnica.&#10;Modelo do aparelho: &#10;Problema: " target="_blank" rel="noopener">
+            <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+            Pedir orçamento
+          </a>
+        </div>
+
+        <ul class="service__grid">
+          <li class="service-card" data-reveal>
+            <span class="icon-box"><svg class="i" aria-hidden="true"><use href="#i-screen"/></svg></span>
+            <h3>Troca de tela</h3>
+            <p>Display trincado, manchado ou sem resposta ao toque.</p>
+          </li>
+          <li class="service-card" data-reveal>
+            <span class="icon-box"><svg class="i" aria-hidden="true"><use href="#i-battery"/></svg></span>
+            <h3>Troca de bateria</h3>
+            <p>Bateria viciada, estufada ou que descarrega rápido.</p>
+          </li>
+          <li class="service-card" data-reveal>
+            <span class="icon-box"><svg class="i" aria-hidden="true"><use href="#i-plug"/></svg></span>
+            <h3>Conector de carga</h3>
+            <p>Aparelho que não carrega ou só carrega em certa posição.</p>
+          </li>
+          <li class="service-card" data-reveal>
+            <span class="icon-box"><svg class="i" aria-hidden="true"><use href="#i-camera"/></svg></span>
+            <h3>Câmera e áudio</h3>
+            <p>Câmeras, alto-falante e microfone com defeito.</p>
+          </li>
+          <li class="service-card" data-reveal>
+            <span class="icon-box"><svg class="i" aria-hidden="true"><use href="#i-chip"/></svg></span>
+            <h3>Software</h3>
+            <p>Atualização, configuração e sistema lento ou travando.</p>
+          </li>
+          <li class="service-card" data-reveal>
+            <span class="icon-box"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg></span>
+            <h3>Diagnóstico</h3>
+            <p>Avaliação do aparelho para indicar o reparo certo.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================== COMO COMPRAR ===================== -->
+    <section class="section steps" id="como-comprar" aria-labelledby="comprar-titulo">
+      <div class="container">
+        <div class="section-head section-head--center" data-reveal>
+          <p class="eyebrow">Como comprar</p>
+          <h2 class="section-title" id="comprar-titulo">Comprar é simples. E a entrega é <span class="text-blue">grátis</span>.</h2>
+        </div>
+
+        <ol class="steps__list">
+          <li class="step" data-reveal>
+            <span class="step__num" aria-hidden="true">01</span>
+            <span class="icon-box"><svg class="i" aria-hidden="true"><use href="#i-bag"/></svg></span>
+            <h3>Escolha</h3>
+            <p>Veja os produtos aqui no site ou no nosso Instagram.</p>
+          </li>
+          <li class="step" data-reveal>
+            <span class="step__num" aria-hidden="true">02</span>
+            <span class="icon-box"><svg class="i" aria-hidden="true"><use href="#i-chat"/></svg></span>
+            <h3>Chame no WhatsApp</h3>
+            <p>Tire suas dúvidas, confirme valores e combine a entrega.</p>
+          </li>
+          <li class="step" data-reveal>
+            <span class="step__num" aria-hidden="true">03</span>
+            <span class="icon-box"><svg class="i" aria-hidden="true"><use href="#i-truck"/></svg></span>
+            <h3>Receba em casa</h3>
+            <p>Entregamos grátis. Consulte a disponibilidade para o seu bairro.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===================== CLIENTES / INSTAGRAM ===================== -->
+    <section class="section social" id="clientes" aria-labelledby="clientes-titulo">
+      <div class="container">
+        <div class="social__card" data-reveal>
+          <a class="social__profile" href="https://www.instagram.com/onshopcelloficial/" target="_blank" rel="noopener">
+            <span class="avatar" aria-hidden="true"><svg><use href="#logo-on"/></svg></span>
+            <span>
+              <span class="social__handle">@onshopcelloficial</span>
+              <span class="social__meta">Acessórios e Assistência · Maracanaú/CE</span>
+            </span>
+          </a>
+
+          <div class="social__text">
+            <h2 class="section-title" id="clientes-titulo">Quem compra, recomenda.</h2>
+            <p class="section-lead">Veja feedbacks, entregas e novidades nos destaques do nosso Instagram.</p>
+          </div>
+
+          <ul class="social__highlights">
+            <li><a href="https://www.instagram.com/onshopcelloficial/" target="_blank" rel="noopener"><span class="avatar avatar--sm" aria-hidden="true"><svg><use href="#logo-on"/></svg></span>Feedback</a></li>
+            <li><a href="https://www.instagram.com/onshopcelloficial/" target="_blank" rel="noopener"><span class="avatar avatar--sm" aria-hidden="true"><svg><use href="#logo-on"/></svg></span>Clientes</a></li>
+            <li><a href="https://www.instagram.com/onshopcelloficial/" target="_blank" rel="noopener"><span class="avatar avatar--sm" aria-hidden="true"><svg><use href="#logo-on"/></svg></span>Smartwatch</a></li>
+          </ul>
+
+          <a class="btn btn--ghost social__cta" href="https://www.instagram.com/onshopcelloficial/" target="_blank" rel="noopener">
+            <svg class="i" aria-hidden="true"><use href="#i-instagram"/></svg>
+            Seguir no Instagram
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CONTATO ===================== -->
+    <section class="section contact" id="contato" aria-labelledby="contato-titulo">
+      <div class="container">
+        <div class="contact__card" data-reveal>
+          <div class="contact__text">
+            <p class="eyebrow">Fale com a gente</p>
+            <h2 class="section-title" id="contato-titulo">Bora deixar seu celular <span class="text-blue">ON</span>?</h2>
+            <p class="section-lead">Atendimento pelo WhatsApp para pedidos, orçamentos e dúvidas.</p>
+            <div class="contact__actions">
+              <a class="btn btn--wa btn--lg" href="https://wa.me/5585998033405" data-wa target="_blank" rel="noopener">
+                <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+                Chamar no WhatsApp
+              </a>
+              <a class="btn btn--ghost btn--lg" href="https://www.instagram.com/onshopcelloficial/" target="_blank" rel="noopener">
+                <svg class="i" aria-hidden="true"><use href="#i-instagram"/></svg>
+                Instagram
+              </a>
+            </div>
+          </div>
+
+          <ul class="contact__info">
+            <li>
+              <span class="icon-box"><svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg></span>
+              <span><small>WhatsApp</small><a href="tel:+5585998033405">(85) 99803-3405</a></span>
+            </li>
+            <li>
+              <span class="icon-box"><svg class="i" aria-hidden="true"><use href="#i-instagram"/></svg></span>
+              <span><small>Instagram</small><a href="https://www.instagram.com/onshopcelloficial/" target="_blank" rel="noopener">@onshopcelloficial</a></span>
+            </li>
+            <li>
+              <span class="icon-box"><svg class="i" aria-hidden="true"><use href="#i-pin"/></svg></span>
+              <span><small>Localização</small><strong>Maracanaú · CE</strong></span>
+            </li>
+            <li>
+              <span class="icon-box"><svg class="i" aria-hidden="true"><use href="#i-truck"/></svg></span>
+              <span><small>Entrega</small><strong>Grátis · consulte sua região</strong></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== RODAPÉ ===================== -->
+  <footer class="site-footer">
+    <div class="container site-footer__top">
+      <div class="site-footer__brand">
+        <a class="brand" href="#inicio" aria-label="On Shop Cell, voltar ao início">
+          <svg class="brand__mark" aria-hidden="true"><use href="#logo-on"/></svg>
+          <span class="brand__word" aria-hidden="true">SHOP <b>CELL</b></span>
+        </a>
+        <p>Acessórios e assistência especializada para o seu celular em Maracanaú/CE.</p>
+      </div>
+
+      <nav aria-label="Rodapé">
+        <ul class="site-footer__links">
+          <li><a href="#produtos">Produtos</a></li>
+          <li><a href="#assistencia">Assistência</a></li>
+          <li><a href="#como-comprar">Como comprar</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+
+      <ul class="site-footer__contact">
+        <li><a href="https://wa.me/5585998033405" data-wa target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>(85) 99803-3405</a></li>
+        <li><a href="https://www.instagram.com/onshopcelloficial/" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-instagram"/></svg>@onshopcelloficial</a></li>
+        <li><span><svg class="i" aria-hidden="true"><use href="#i-pin"/></svg>Maracanaú · CE</span></li>
+      </ul>
+    </div>
+
+    <div class="container site-footer__bottom">
+      <p>© <span data-year>2026</span> On Shop Cell. Todos os direitos reservados.</p>
+      <a href="#inicio">Voltar ao topo <svg class="i" aria-hidden="true"><use href="#i-arrow-up"/></svg></a>
+    </div>
+  </footer>
+
+  <a class="wa-float" href="https://wa.me/5585998033405" data-wa data-wa-float target="_blank" rel="noopener" aria-label="Chamar no WhatsApp">
+    <svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+  </a>
+</body>
+</html>
