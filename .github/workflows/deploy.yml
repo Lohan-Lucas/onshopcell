@@ -1,0 +1,46 @@
+# Publica o site no GitHub Pages a cada push na branch main
+# (ou manualmente: aba Actions → "Publicar site" → Run workflow).
+name: Publicar site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# um deploy por vez; um novo push não cancela o que já está publicando
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v7
+
+      - name: Configurar o GitHub Pages
+        uses: actions/configure-pages@v6
+
+      # só os arquivos do site vão para o ar (README, .github etc. ficam de fora)
+      - name: Montar a pasta do site
+        run: |
+          mkdir _site
+          cp -r index.html styles.css script.js robots.txt assets frames _site/
+
+      - name: Enviar os arquivos
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+
+      - name: Publicar
+        id: deployment
+        uses: actions/deploy-pages@v5
