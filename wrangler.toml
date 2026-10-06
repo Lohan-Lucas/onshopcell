@@ -1,10 +1,18 @@
-# Configuração do Cloudflare Pages (site + funções + banco KV)
+# Configuração do Cloudflare Pages (site + funções + bancos), tudo no plano gratuito
 name = "onshopcell"
 pages_build_output_dir = "./public"
 compatibility_date = "2026-09-01"
 
-# Banco KV com o catálogo, as fotos do painel e o bloqueio de tentativas de login.
-# O id é criado uma vez com: npx wrangler kv namespace create LOJA
+# Banco SQL (D1): catálogo, histórico de versões e bloqueio de tentativas de login.
+# Consistência forte: duas gravações ao mesmo tempo nunca se sobrescrevem.
+# Criado uma vez com: npx wrangler d1 create loja --location=enam
+[[d1_databases]]
+binding = "DB"
+database_name = "loja"
+database_id = "09db9553-5f63-4d02-b6dd-fd95f7d62d69"
+
+# Armazenamento de fotos (KV): cada foto tem nome único e nunca é sobrescrita.
+# Criado uma vez com: npx wrangler kv namespace create LOJA
 [[kv_namespaces]]
 binding = "LOJA"
-id = "SUBSTITUIR_PELO_ID_DO_KV"
+id = "c6530ecc36e5479b8843c59989abb218"

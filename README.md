@@ -1,107 +1,137 @@
-# On Shop Cell: site
+# On Shop Cell: site e app do lojista
 
-Site da **On Shop Cell** (acessórios e assistência especializada, Maracanaú/CE), feito em HTML, CSS e JavaScript puros, sem bibliotecas e sem etapa de build. Todas as ferramentas usadas para manter o site no ar são gratuitas.
+Site da **On Shop Cell** (acessórios e assistência especializada, Maracanaú/CE) com uma animação de rolagem na primeira tela e um catálogo que o dono atualiza pelo celular. HTML, CSS e JavaScript puros, sem bibliotecas. Tudo roda no plano gratuito da Cloudflare (sem cartão).
 
-- **Site:** https://lohan-lucas.github.io/onshopcell/
-- **Repositório:** https://github.com/Lohan-Lucas/onshopcell
-- **Publicação:** automática pelo GitHub Actions, a cada `git push` na branch `main` (cerca de 1 minuto; acompanhe na aba **Actions**).
+| | Endereço |
+|---|---|
+| Site | https://onshopcell.pages.dev/ |
+| App do lojista | https://onshopcell.pages.dev/admin/ |
+| Código | https://github.com/Lohan-Lucas/onshopcell |
+
+## App do lojista (cadastro do catálogo)
+
+App instalável no celular (PWA) para o dono cadastrar, editar e excluir produtos. As alterações aparecem no site **na hora**, sem publicar nada.
+
+- **Fotos:** pela câmera ou galeria, até 6 por produto (a primeira é a capa). O próprio celular reduz cada foto para no máximo 1200 px e remove os dados de GPS antes de enviar.
+- **Dados do produto:** nome, preço, preço antigo (aparece riscado, como promoção), categoria (dá para criar novas), descrição, cores disponíveis (16 prontas ou personalizadas), "Disponível" (desligado = "Esgotado") e "Destaque".
+- **Outras funções:** reordenar os produtos, buscar, filtrar por categoria e baixar uma cópia de segurança.
+
+**Instalar no celular**
+
+- Android (Chrome): abra o endereço do app e toque em **Instalar o app** (ou menu ⋮ do Chrome → *Instalar app*).
+- iPhone (Safari): abra o endereço, toque em **Compartilhar** e depois em **Adicionar à Tela de Início**.
+
+**Senha e segurança**
+
+- A senha fica guardada só na Cloudflare, criptografada, nunca no código. Para trocar (desconecta todos os aparelhos):
+  ```bash
+  npx wrangler pages secret put ADMIN_PASSWORD --project-name onshopcell
+  ```
+- O login dura 30 dias por aparelho, num cookie seguro.
+- A senha é bloqueada após 8 erros em 15 minutos (100 por dia no total).
+- O app só aceita alterações vindas do próprio site, carrega apenas arquivos do site e não aparece no Google.
+- Duas gravações ao mesmo tempo nunca se sobrescrevem: o banco confere a versão antes de gravar.
 
 ## Estrutura
 
 ```
 site-marcelo/
-├── index.html        página completa (animação, produtos, assistência, contato)
-├── styles.css        visual (cores do logo: preto, azul #0A6CF5 e prata)
-├── script.js         animação de rolagem + menu, filtros e links do WhatsApp
-├── frames/           frame-0001.webp … frame-0240.webp (a animação)
-├── assets/
-│   ├── produtos/     fotos dos produtos
-│   ├── og-image.jpg  imagem que aparece ao compartilhar o link (WhatsApp, Instagram...)
-│   └── favicon.svg, favicon-32.png, apple-touch-icon.png, icon-512.png
-├── .github/workflows/deploy.yml   publicação automática no GitHub Pages
-├── _headers          cache e segurança (usado só se migrar para a Cloudflare)
-└── robots.txt
+├── public/                    o que vai para o ar
+│   ├── index.html, styles.css, script.js   site + animação + vitrine
+│   ├── frames/                240 frames da animação (frame-0001.webp …)
+│   ├── assets/                ícones, imagem de compartilhamento e fotos antigas
+│   ├── data/produtos.json     catálogo inicial (reserva se a API falhar)
+│   ├── admin/                 app do lojista
+│   └── _headers, 404.html, robots.txt
+├── functions/                 API (Cloudflare Pages Functions)
+│   ├── api/[[rota]].js        /api/produtos e /api/admin/*
+│   └── img/[[foto]].js        fotos enviadas pelo app (/img/…)
+├── lib/loja.js                regras do servidor (catálogo, login, fotos)
+├── wrangler.toml              configuração da Cloudflare (bancos D1 e KV)
+└── .github/workflows/deploy.yml
+```
+
+## Onde ficam os dados
+
+| O quê | Onde |
+|---|---|
+| Produtos e categorias | banco **D1** `loja`, tabela `catalogo` |
+| Versões anteriores (últimas 50) | banco **D1** `loja`, tabela `historico` |
+| Fotos enviadas pelo app | **KV** `LOJA` (endereços `/img/…`) |
+| Fotos iniciais (recortes do Instagram) | `public/assets/produtos/` |
+
+**Cópia de segurança:** no app, menu ⋮ → *Baixar cópia de segurança* (arquivo `.json`).
+
+**Voltar uma versão anterior (emergência):**
+
+```bash
+# ver as últimas versões
+npx wrangler d1 execute loja --remote --command "SELECT versao, atualizado_em FROM historico ORDER BY versao DESC LIMIT 10"
+# restaurar a versão 12 (troque o número)
+npx wrangler d1 execute loja --remote --command "UPDATE catalogo SET dados = (SELECT dados FROM historico WHERE versao = 12), versao = versao + 1, atualizado_em = strftime('%Y-%m-%dT%H:%M:%fZ', 'now') WHERE id = 1"
 ```
 
 ## A animação (primeira tela)
 
-- Os frames ficam em **`frames/`**, ao lado do `index.html`, com os nomes `frame-0001.webp` até `frame-0240.webp`.
-- Se mudar a quantidade de frames, ajuste `CONFIG.frames.count` em `script.js`.
-- **Trocou os frames depois de publicar?** Aumente `CONFIG.frames.version` em `script.js` (ex.: `'2'` → `'3'`). Assim os visitantes baixam os novos e não ficam com a versão antiga em cache.
-- **Duração:** a altura de `.hero` em `styles.css` (`500vh`). Um valor maior deixa a animação mais lenta.
-- **Enquadramento:** o frame sempre preenche a tela mantendo a proporção. No celular em pé, ele corta no máximo 25% (`CONFIG.maxCrop`) e completa o resto esticando as bordas do próprio frame, para que o aparelho nunca fique cortado.
-- **Textos sobre a animação:** são os blocos `data-beat="início,fim"` no `index.html` (0 = começo da rolagem, 1 = fim).
+- Os frames ficam em **`public/frames/`**: `frame-0001.webp` até `frame-0240.webp`. Se mudar a quantidade, ajuste `CONFIG.frames.count` em `public/script.js`.
+- **Trocou os frames?** Aumente `CONFIG.frames.version` em `public/script.js` (ex.: `'2'` → `'3'`) para os visitantes baixarem os novos.
+- **Duração:** altura de `.hero` em `public/styles.css` (`500vh`). Um valor maior deixa a animação mais lenta.
+- **Enquadramento:** o frame sempre preenche a tela mantendo a proporção. No celular em pé, ele corta no máximo 25% (`CONFIG.maxCrop`) e completa o resto esticando as bordas do próprio frame.
+- **Textos sobre a animação:** blocos `data-beat="início,fim"` no `public/index.html`.
 
-Como funciona: os frames são pré-carregados em ordem progressiva (primeiro, último, depois a cada 128, 64, 32... frames). A tela de carregamento espera no máximo 5 s e o restante continua baixando em segundo plano. Durante a rolagem o canvas mostra o frame correspondente com suavização e fusão entre frames vizinhos.
+**Como funciona por baixo:**
 
-Com **"reduzir movimento"** ligado no sistema, ou em modo de **economia de dados**, a primeira tela vira uma capa estática com um único frame (`CONFIG.staticFrame`) e os outros 239 nem são baixados. Se a pasta `frames/` estiver vazia, aparece uma capa com o logo.
+- **Carregamento:** os frames são pré-carregados em ordem progressiva. A tela de carregamento espera no máximo 5 s e o restante continua baixando em segundo plano.
+- **Movimentos reduzidos:** com "reduzir movimento" ligado no sistema, ou em economia de dados, a primeira tela vira uma imagem fixa e só 1 frame é baixado.
 
 ## Testar no computador
 
-O jeito mais fiel é servir a pasta por HTTP (abrir o `index.html` com dois cliques também funciona, só que sem cache):
+Crie um arquivo `.dev.vars` na pasta do projeto. Ele já está no `.gitignore` e nunca vai para o GitHub:
 
-```bash
-python -m http.server 8080
-# abra http://localhost:8080
+```
+ADMIN_PASSWORD=uma-senha-de-teste
+SESSION_SECRET=um-texto-aleatorio-bem-longo
 ```
 
-No VS Code, a extensão gratuita **Live Server** faz o mesmo com um clique.
+Depois rode `npx wrangler pages dev` e abra http://127.0.0.1:8788/ (site) e http://127.0.0.1:8788/admin/ (app). Os bancos locais são separados dos de produção.
 
-## Publicar e atualizar (GitHub Pages + GitHub Actions)
+## Publicar mudanças no código
 
-Para colocar uma alteração no ar:
+Os **produtos** não precisam de publicação: o app grava direto no banco. Só mudanças em arquivos (textos fixos, visual, animação) precisam ser publicadas.
 
-```bash
-git add -A
-git commit -m "Atualiza produtos"
-git push
-```
+- **Pelo computador** (já logado com `npx wrangler login`):
+  ```bash
+  npx wrangler pages deploy
+  ```
+- **Automático a cada `git push` (opcional):**
+  1. Crie um token em Cloudflare → *My Profile* → *API Tokens* → *Create Token* → *Custom token*, com as permissões de conta **Cloudflare Pages: Edit**, **D1: Edit** e **Workers KV Storage: Edit**.
+  2. No GitHub, vá em *Settings* → *Secrets and variables* → *Actions* e cadastre `CLOUDFLARE_API_TOKEN` (o token) e `CLOUDFLARE_ACCOUNT_ID` (o id da conta, que aparece em `npx wrangler whoami`).
 
-O workflow `.github/workflows/deploy.yml` monta uma pasta só com os arquivos do site (o README e as configurações ficam de fora) e publica no GitHub Pages. Também dá para editar um arquivo direto no github.com (ícone de lápis), e a publicação roda do mesmo jeito. Para publicar de novo sem mudar nada: aba **Actions** → **Publicar site** → **Run workflow**.
+  Sem esses segredos, o workflow só avisa e segue.
 
-Como está configurado, caso precise refazer em outra conta:
+O endereço antigo (`lohan-lucas.github.io/onshopcell`) redireciona para o novo pelo mesmo workflow.
 
-1. Repositório **público**: o GitHub Pages gratuito exige.
-2. **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-3. Enviar o código para a branch `main`.
+**Domínio próprio (opcional, pago):** um endereço como `onshopcell.com.br` custa cerca de R$ 40/ano no [registro.br](https://registro.br). Configure em Cloudflare → *Workers & Pages* → *onshopcell* → *Custom domains* (o HTTPS continua grátis). Depois troque `onshopcell.pages.dev` no `public/index.html` (canonical, `og:url`, `og:image` e o JSON-LD).
 
-Limites do plano gratuito: site de até 1 GB e cerca de 100 GB de tráfego por mês. A animação pesa ~12 MB na primeira visita (nas seguintes vem do cache), o que dá algo como 8 mil visitantes novos por mês.
+## Limites do plano gratuito
 
-> **Atenção aos termos de uso:** o GitHub Pages não pode ser usado como hospedagem de loja/e-commerce ("sites voltados principalmente a transações comerciais"). Uma vitrine que encaminha pedidos para o WhatsApp fica numa zona cinzenta. Para eliminar esse risco, ou se precisar de mais tráfego, mude para a Cloudflare Pages (abaixo): também é grátis, permite uso comercial e não limita o tráfego de sites estáticos.
+| Serviço | Limite | Na prática |
+|---|---|---|
+| Site (arquivos) | tráfego ilimitado | animação, fotos antigas e páginas |
+| Funções (API e fotos do app) | 100 mil requisições/dia | milhares de visitas por dia |
+| D1 (catálogo) | 5 milhões de leituras e 100 mil gravações/dia | uma leitura por visita |
+| KV (fotos do app) | 1 GB e 1 mil gravações/dia | milhares de fotos guardadas |
 
-### Domínio próprio (opcional, pago)
-
-Um endereço como `onshopcell.com.br` custa cerca de R$ 40/ano no [registro.br](https://registro.br). Configure em **Settings → Pages → Custom domain** (o HTTPS continua grátis) e troque o endereço no `index.html`: procure `lohan-lucas.github.io` (canonical, `og:url`, `og:image` e o bloco JSON-LD). É isso que faz a prévia do link aparecer certinha no WhatsApp.
-
-### Alternativa: Cloudflare Pages
-
-1. Crie uma conta grátis na [Cloudflare](https://dash.cloudflare.com/sign-up) → **Workers & Pages** → **Create** → aba **Pages** → **Connect to Git** → escolha `Lohan-Lucas/onshopcell`.
-2. Configuração: *Framework preset* **None** · *Build command* **(vazio)** · *Build output directory* **`/`** → **Save and Deploy**.
-3. Troque o endereço no `index.html` pelo novo (`*.pages.dev` ou domínio próprio) e, se quiser, desligue o GitHub Pages em **Settings → Pages**.
-
-O arquivo `_headers` já traz as regras de cache (frames guardados por 30 dias) para a Cloudflare. Sem GitHub, também dá para publicar pelo terminal com [Node.js](https://nodejs.org):
-
-```bash
-npx wrangler login                                                     # abre o navegador para entrar na conta Cloudflare
-npx wrangler pages project create onshopcell --production-branch=main  # só na primeira vez
-npx wrangler pages deploy . --project-name=onshopcell --branch=main    # publica (repita a cada atualização)
-```
-
-## Como editar o conteúdo
+## Editar textos fixos do site
 
 | O quê | Onde |
 |---|---|
-| Número do WhatsApp | `CONFIG.whatsapp` em `script.js` **e** os links no `index.html` (procure `5585998033405`) |
-| Produto novo | copie um bloco `<li class="product">` inteiro no `index.html` e troque foto, nome, descrição, `data-category` e `data-product` (o nome que vai na mensagem do WhatsApp) |
-| Fotos dos produtos | `assets/produtos/` (proporção 3:4 ou 4:5, cerca de 800 px de largura, de preferência `.webp`) |
-| Categorias do filtro | os botões `data-filter` no `index.html` precisam bater com o `data-category` dos produtos |
-| Serviços da assistência | seção `#assistencia` no `index.html` |
-| Cores e fontes | variáveis no topo do `styles.css` (`:root`) |
-
-> As fotos atuais foram recortadas dos posts do Instagram (baixa resolução). Para melhor qualidade, troque-as pelas fotos originais com os mesmos nomes de arquivo.
+| Número do WhatsApp | `CONFIG.whatsapp` em `public/script.js` **e** os links no `public/index.html` (procure `5585998033405`) |
+| Serviços da assistência, "como comprar", contato | seções do `public/index.html` |
+| Cores e fontes | variáveis no topo do `public/styles.css` (`:root`) |
 
 ## Dicas
 
-- **Dados no celular:** dá para criar uma versão menor dos frames só para celular (ex.: 960×540) numa pasta `frames/mobile/` e ativar `CONFIG.frames.mobileFolder: 'frames/mobile/'`.
-- **Frames repetidos:** a sequência atual tem 48 frames idênticos ao anterior (vídeo de 24 fps exportado a 30 fps). Ao gerar os frames de novo, exportar na taxa original do vídeo deixa a animação um pouco mais leve e mais uniforme.
-- **OneDrive:** esta pasta está dentro do OneDrive. Se o Git reclamar de arquivos bloqueados, pause a sincronização durante o `git push` ou mova o projeto para uma pasta fora do OneDrive.
+- **Dados no celular:** dá para criar uma versão menor dos frames só para celular (ex.: 960×540) numa pasta `public/frames/mobile/` e ativar `CONFIG.frames.mobileFolder: 'frames/mobile/'`.
+- **Frames repetidos:** a sequência atual tem 48 frames idênticos ao anterior (vídeo de 24 fps exportado a 30 fps). Exportar de novo na taxa original deixa a animação mais leve e mais uniforme.
+- **OneDrive:** a pasta do projeto está dentro do OneDrive. Se o Git reclamar de arquivos bloqueados, pause a sincronização durante o `git push`.

@@ -79,9 +79,9 @@ async function salvar(context) {
   } catch {
     return erro(400, 'Dados inválidos.');
   }
+  const conflito = () => erro(409, 'O catálogo foi alterado em outro aparelho. Recarregue a página e repita a alteração.');
   const atual = await lerCatalogo(env, request);
-  if (Number(corpo.baseVersao) !== Number(atual.versao || 0)) {
-    return erro(409, 'O catálogo foi alterado em outro aparelho. Recarregue a página e repita a alteração.');
-  }
-  return json(await salvarCatalogo(env, context, atual, limparCatalogo(corpo)));
+  if (Number(corpo.baseVersao) !== Number(atual.versao || 0)) return conflito();
+  const salvo = await salvarCatalogo(env, context, atual, limparCatalogo(corpo));
+  return salvo ? json(salvo) : conflito();
 }
